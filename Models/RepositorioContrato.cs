@@ -89,6 +89,23 @@ namespace Inmobiliaria_DotNet.Models;
 			return res;
 		}
 
+		public int BorrarContrato(int idContrato){
+			int res = 0;
+			using (MySqlConnection connection = new MySqlConnection(connectionString))
+			{
+				var query = @"DELETE FROM contrato WHERE idContrato = @idContrato";
+				using (MySqlCommand command = new MySqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@idContrato", idContrato);
+					connection.Open();
+					res = command.ExecuteNonQuery();
+					connection.Close();
+				}
+				connection.Close();
+			}
+			return res;
+		}
+
 		public List<Contrato> ListarContratos()
 		{
 			List<Contrato> listaContratos = new List<Contrato>();
