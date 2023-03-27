@@ -1,0 +1,65 @@
+@model IEnumerable<Inmobiliaria_DotNet.Models.Inquilino>
+
+@{
+	ViewData["Title"] = "ListarInquilinos";
+}
+
+<h1>Listar de Inquilinos</h1>
+
+<p>
+	<a asp-action="AltaInquilino" class="btn btn-primary">Agregar Inquilino</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.idInquilino)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Nombre)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Apellido)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Dni)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Telefono)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (var item in Model) {
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.idInquilino)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Nombre)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Apellido)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Dni)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Telefono)
+			</td>
+			<td>
+				<a href='@Url.Action("EditarInquilino", new { id = item.idInquilino })' class="btn btn-sm btn-info">
+					<i class="fa fa-pencil"></i>
+				</a>
+				<a href='@Url.Action("DetallesInquilino", new { id = item.idInquilino })' class="btn btn-sm btn-warning">
+					<i class="fa fa-circle-info"></i>
+				</a>
+				<a href='@Url.Action("BorrarInquilino", new { id = item.idInquilino })' class="btn btn-sm btn-danger">
+					<i class="fa-solid fa-trash"></i>
+				</a>
+			</td>
+		</tr>
+}
+	</tbody>
+</table>

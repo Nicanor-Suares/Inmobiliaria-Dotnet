@@ -1,0 +1,121 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Inmobiliaria_DotNet
+build_property.RootNamespace = Inmobiliaria_DotNet
+build_property.ProjectDir = C:\Users\nican\Desktop\Uni\.NET\Inmobiliaria\Inmobiliaria-DotNet\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\nican\Desktop\Uni\.NET\Inmobiliaria\Inmobiliaria-DotNet
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Contrato/AltaContrato.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9cQWx0YUNvbnRyYXRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Contrato/EditarContrato.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9cRWRpdGFyQ29udHJhdG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Contrato/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udHJhdG9caW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inmueble/AltaInmueble.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5tdWVibGVcQWx0YUlubXVlYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inmueble/BorrarInmueble.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5tdWVibGVcQm9ycmFySW5tdWVibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inmueble/DetallesInmueble.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5tdWVibGVcRGV0YWxsZXNJbm11ZWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inmueble/EditarInmueble.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5tdWVibGVcRWRpdGFySW5tdWVibGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inmueble/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5tdWVibGVcaW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inquilino/AltaInquilino.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5xdWlsaW5vXEFsdGFJbnF1aWxpbm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inquilino/BorrarInquilino.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5xdWlsaW5vXEJvcnJhcklucXVpbGluby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inquilino/DetallesInquilino.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5xdWlsaW5vXERldGFsbGVzSW5xdWlsaW5vLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inquilino/EditarInquilino.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5xdWlsaW5vXEVkaXRhcklucXVpbGluby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Inquilino/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5xdWlsaW5vXGluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Pagos/ListarPagos.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnb3NcTGlzdGFyUGFnb3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Propietarios/AltaPropietario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGlldGFyaW9zXEFsdGFQcm9waWV0YXJpby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Propietarios/BorrarPropietario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGlldGFyaW9zXEJvcnJhclByb3BpZXRhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Propietarios/DetallesPropietario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGlldGFyaW9zXERldGFsbGVzUHJvcGlldGFyaW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Propietarios/EditarPropietario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGlldGFyaW9zXEVkaXRhclByb3BpZXRhcmlvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Propietarios/index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcGlldGFyaW9zXGluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/nican/Desktop/Uni/.NET/Inmobiliaria/Inmobiliaria-DotNet/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-oy5u169fht
