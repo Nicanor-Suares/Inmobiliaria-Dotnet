@@ -56,7 +56,8 @@ namespace Inmobiliaria_DotNet.Controllers
 		// GET: Inquilino/Edit/5
 		public ActionResult EditarInquilino(int id)
 		{
-			return View();
+			var inquiEdit = Repo.BuscarInquilino(id);
+			return View(inquiEdit);
 		}
 
 		// POST: Inquilino/Edit/5

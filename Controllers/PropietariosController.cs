@@ -57,7 +57,8 @@ namespace Inmobiliaria_DotNet.Controllers
 			[HttpGet]
 			public ActionResult EditarPropietario(int id)
 			{
-					return View();
+					var propietarioEdit = Repo.BuscarPropietario(id);
+					return View(propietarioEdit);
 			}
 
 			// POST: Propietarios/Edit/5
