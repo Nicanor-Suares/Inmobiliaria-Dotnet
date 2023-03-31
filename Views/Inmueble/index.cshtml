@@ -4,7 +4,7 @@
     ViewData["Title"] = "ListarInmuebles";
 }
 
-<h1>Listar de Inmuebles</h1>
+<h1>Lista de Inmuebles</h1>
 
 <p>
     <a asp-action="AltaInmueble" class="btn btn-primary">Agregar Inmueble</a>
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PropietarioInmueble)
+                @(item.PropietarioInmueble.Nombre + " " + item.PropietarioInmueble.Apellido)
             </td>
             <td>
 				<a href='@Url.Action("EditarInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-info">

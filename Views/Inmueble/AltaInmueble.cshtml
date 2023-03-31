@@ -1,45 +1,52 @@
 @model Inmobiliaria_DotNet.Models.Inmueble
 
 @{
-    ViewData["Title"] = "AltaInmueble";
+	ViewData["Title"] = "AltaInmueble";
+	var listaPropietarios = (IList<Propietario>)ViewBag.Propietario;
 }
 
-<h1>AltaInmueble</h1>
+<h1>Crear Inmueble</h1>
 
 <h4>Inmueble</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AltaInmueble">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Disponibilidad" checked/> @Html.DisplayNameFor(model => model.Disponibilidad)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PropietarioInmueble" class="control-label"></label>
-                <input asp-for="PropietarioInmueble" class="form-control" />
-                <span asp-validation-for="PropietarioInmueble" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Direccion" class="control-label"></label>
-                <input asp-for="Direccion" class="form-control" />
-                <span asp-validation-for="Direccion" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4">
+		<form asp-action="AltaInmueble">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" asp-for="Disponibilidad" checked/> @Html.DisplayNameFor(model => model.Disponibilidad)
+				</label>
+			</div>
+			<div class="form-group">
+				<label asp-for="Precio" class="control-label"></label>
+				<input asp-for="Precio" class="form-control" />
+				<span asp-validation-for="Precio" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Direccion" class="control-label"></label>
+				<input asp-for="Direccion" class="form-control" />
+				<span asp-validation-for="Direccion" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="PropietarioId" class="control-label">Propietario</label>
+				<select class="form-control" name="PropietarioId">
+					<option value="" disabled selected>Seleccione un propietario</option>
+					@foreach (var item in listaPropietarios)
+					{
+						<option value="@item.idPropietario">@(item.ToString())</option>
+					}
+				</select>
+				<span asp-validation-for="PropietarioId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Create" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Index">Back to List</a>
 </div>
 

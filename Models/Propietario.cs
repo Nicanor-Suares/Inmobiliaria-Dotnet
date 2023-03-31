@@ -46,5 +46,10 @@ public class Propietario
 		this.Telefono = telefono;
 	}
 
+  public override string ToString()
+  {
+    return $"{Nombre} {Apellido}";
+  }
+
 
 }
