@@ -12,11 +12,13 @@ namespace Inmobiliaria_DotNet.Controllers
 	{
 		private readonly RepositorioInmueble Repo;
 		private readonly RepositorioPropietario repoPropietario;
+		private readonly RepositorioTipoInmueble repoTipoInmueble;
 
 		public InmuebleController()
 		{
 			Repo = new RepositorioInmueble();
 			repoPropietario = new RepositorioPropietario();
+			repoTipoInmueble = new RepositorioTipoInmueble();
 		}
 		// GET: Inmueble
 		public ActionResult Index()
@@ -38,6 +40,7 @@ namespace Inmobiliaria_DotNet.Controllers
 			try
 			{
 				ViewBag.Propietario = repoPropietario.ListarPropietarios();
+				ViewBag.TipoInmueble = repoTipoInmueble.listarTiposInmuebles();
 				return View();
 			}
 			catch (Exception ex)
@@ -69,6 +72,7 @@ namespace Inmobiliaria_DotNet.Controllers
 			try
 			{
 				ViewBag.Propietario = repoPropietario.ListarPropietarios();
+				ViewBag.TipoInmueble = repoTipoInmueble.listarTiposInmuebles();
 				Inmueble inmuEditar = Repo.BuscarInmueble(id);
 				return View(inmuEditar);
 			}

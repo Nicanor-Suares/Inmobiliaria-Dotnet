@@ -27,6 +27,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PropietarioInmueble)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoInmueble)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,6 +50,9 @@
             </td>
             <td>
                 @(item.PropietarioInmueble.Nombre + " " + item.PropietarioInmueble.Apellido)
+            </td>
+            <td>
+                @(item.TipoInmueble.tipo)
             </td>
             <td>
 				<a href='@Url.Action("EditarInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-info">

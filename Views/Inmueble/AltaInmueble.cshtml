@@ -3,6 +3,7 @@
 @{
 	ViewData["Title"] = "AltaInmueble";
 	var listaPropietarios = (IList<Propietario>)ViewBag.Propietario;
+	var listaTipos = (IList<TipoInmueble>)ViewBag.tipoInmueble;
 }
 
 <h1>Crear Inmueble</h1>
@@ -38,6 +39,17 @@
 					}
 				</select>
 				<span asp-validation-for="PropietarioId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="idTipo" class="control-label">Tipo de inmueble</label>
+				<select class="form-control" name="idTipo">
+					<option value="" disabled selected>Seleccione el tipo de inmueble</option>
+					@foreach (var item in listaTipos)
+					{
+						<option value="@item.idTipo">@(item.ToString())</option>
+					}
+				</select>
+				<span asp-validation-for="idTipo" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<input type="submit" value="Create" class="btn btn-primary" />

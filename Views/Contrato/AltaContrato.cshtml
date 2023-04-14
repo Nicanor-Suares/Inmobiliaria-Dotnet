@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "AltaContrato";
+   	var listaInquilinos = (IList<Inquilino>)ViewBag.Inquilino;
+   	var listaPropietarios = (IList<Propietario>)ViewBag.Propietario;
+   	var listaInmuebles = (IList<Inmueble>)ViewBag.Inmueble;
 }
 
 <h1>AltaContrato</h1>
@@ -23,19 +26,24 @@
                 <span asp-validation-for="FechaFin" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdInmueble" class="control-label"></label>
-                <input asp-for="IdInmueble" class="form-control" />
-                <span asp-validation-for="IdInmueble" class="text-danger"></span>
+                <label asp-for="InmuebleId" class="control-label">Inmueble</label>
+                <select class="form-control" name="InmuebleId">
+					<option value="" disabled selected>Seleccione un inmueble</option>
+					@foreach (var item in listaInmuebles)
+					{
+						<option value="@item.idInmueble">@(item.ToString())</option>
+					}
+				</select>
             </div>
             <div class="form-group">
-                <label asp-for="IdInquilino" class="control-label"></label>
-                <input asp-for="IdInquilino" class="form-control" />
-                <span asp-validation-for="IdInquilino" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IdPropietario" class="control-label"></label>
-                <input asp-for="IdPropietario" class="form-control" />
-                <span asp-validation-for="IdPropietario" class="text-danger"></span>
+                <label asp-for="InquilinoId" class="control-label">Inquilino</label>
+                <select class="form-control" name="InquilinoId">
+					<option value="" disabled selected>Seleccione un inquilino</option>
+					@foreach (var item in listaInquilinos)
+					{
+						<option value="@item.idInquilino">@(item.ToString())</option>
+					}
+				</select>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

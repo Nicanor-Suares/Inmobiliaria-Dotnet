@@ -10,16 +10,15 @@ namespace Inmobiliaria_DotNet.Models;
 			int res = 0;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, idInquilino, idPropietario, idInmueble, activo)
-				VALUES (@FechaInicio, @FechaFin, @IdInquilino, @IdPropietario, @IdInmueble, @Activo);
+				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, InquilinoId, InmuebleId, activo)
+				VALUES (@FechaInicio, @FechaFin, @InquilinoId, @InmuebleId, @Activo);
 				SELECT LAST_INSERT_ID();";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@FechaInicio", contrato.FechaInicio);
 					command.Parameters.AddWithValue("@FechaFin", contrato.FechaFin);
-					command.Parameters.AddWithValue("@IdInquilino", contrato.IdInquilino);
-					command.Parameters.AddWithValue("@IdPropietario", contrato.IdPropietario);
-					command.Parameters.AddWithValue("@IdInmueble", contrato.IdInmueble);
+					command.Parameters.AddWithValue("@InquilinoId", contrato.InquilinoId);
+					command.Parameters.AddWithValue("@InmuebleId", contrato.InmuebleId);
 					command.Parameters.AddWithValue("@Activo", contrato.Activo);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
@@ -35,16 +34,16 @@ namespace Inmobiliaria_DotNet.Models;
 			int res = 0;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
+				//FIX
 				var query = @"UPDATE contrato SET fechaInicio = @FechaInicio, fechaFin = @FechaFin, 
-				idInquilino = @IdInquilino, idPropietario = @IdPropietario, idInmueble = @IdInmueble, 
+				InquilinoId = @InquilinoId, PropietarioId = @PropietarioId, InmuebleId = @InmuebleId, 
 				activo = @Activo WHERE idContrato = @IdContrato";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@fechaInicio", contrato.FechaInicio);
 					command.Parameters.AddWithValue("@fechaFin", contrato.FechaFin);
-					command.Parameters.AddWithValue("@idInquilino", contrato.IdInquilino);
-					command.Parameters.AddWithValue("@idPropietario", contrato.IdPropietario);
-					command.Parameters.AddWithValue("@idInmueble", contrato.IdInmueble);
+					command.Parameters.AddWithValue("@InquilinoId", contrato.InquilinoId);
+					command.Parameters.AddWithValue("@InmuebleId", contrato.InmuebleId);
 					command.Parameters.AddWithValue("@activo", contrato.Activo);
 					connection.Open();
 					res = command.ExecuteNonQuery();
@@ -61,7 +60,7 @@ namespace Inmobiliaria_DotNet.Models;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
 				var query = @"SELECT idContrato, fechaInicio, fechaFin, 
-				idInquilino, idPropietario, idInmueble, activo FROM contrato 
+				InquilinoId, InmuebleId, activo FROM contrato 
 				WHERE idContrato = @IdContrato";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
@@ -75,9 +74,8 @@ namespace Inmobiliaria_DotNet.Models;
 								Convert.ToInt32(reader["idContrato"]),
 								Convert.ToDateTime(reader["fechaInicio"]),
 								Convert.ToDateTime(reader["fechaFin"]),
-								Convert.ToInt32(reader["idInmueble"]),
-								Convert.ToInt32(reader["idInquilino"]),
-								Convert.ToInt32(reader["idPropietario"]),
+								Convert.ToInt32(reader["InmuebleId"]),
+								Convert.ToInt32(reader["InquilinoId"]),
 								Convert.ToBoolean(reader["activo"])
 							);
 						}
@@ -112,7 +110,12 @@ namespace Inmobiliaria_DotNet.Models;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
 				var query = @"SELECT idContrato, fechaInicio, fechaFin, 
-				idInquilino, idPropietario, idInmueble, activo FROM contrato";
+				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp 
+				FROM contrato c 
+				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
+				INNER JOIN inmueble inmu ON c.idInmueble = inmu.idInmueble
+				INNER JOIN propietario p on inmu.propietarioId = p.idPropietario
+				";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
 					connection.Open();
@@ -125,10 +128,22 @@ namespace Inmobiliaria_DotNet.Models;
 								idContrato = reader.GetInt32(nameof(contrato.idContrato)),
 								FechaInicio = reader.GetDateTime(nameof(contrato.FechaInicio)),
 								FechaFin = reader.GetDateTime(nameof(contrato.FechaFin)),
-								IdInquilino = reader.GetInt32(nameof(contrato.IdInquilino)),
-								IdPropietario = reader.GetInt32(nameof(contrato.IdPropietario)),
-								IdInmueble = reader.GetInt32(nameof(contrato.IdInmueble)),
-								Activo = reader.GetBoolean(nameof(contrato.Activo))
+								InquilinoId = reader.GetInt32("idInquilino"),
+								InmuebleId = reader.GetInt32("idInmueble"),
+								Activo = reader.GetBoolean(nameof(contrato.Activo)),
+								InquilinoContrato = new Inquilino
+								{
+									Nombre = reader.GetString(nameof(contrato.InquilinoContrato.Nombre)),
+									Apellido = reader.GetString(nameof(contrato.InquilinoContrato.Apellido))
+								},
+								InmuebleContrato = new Inmueble
+								{
+									Direccion = reader.GetString(nameof(contrato.InmuebleContrato.Direccion)),
+									PropietarioInmueble = new Propietario {
+										Nombre = reader.GetString("nombreProp"),
+										Apellido = reader.GetString("apellidoProp")
+									}
+								}
 							};
 							listaContratos.Add(contrato);
 						}

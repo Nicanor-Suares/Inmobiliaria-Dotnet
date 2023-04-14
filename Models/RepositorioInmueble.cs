@@ -11,8 +11,8 @@ public class RepositorioInmueble
 		int res = 0;
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
-			string query = @"INSERT INTO inmueble (direccion, disponibilidad, precio, propietarioId) 
-			VALUES (@Direccion, @Disponibilidad, @Precio, @PropietarioId);
+			string query = @"INSERT INTO inmueble (direccion, disponibilidad, precio, propietarioId, idTipo) 
+			VALUES (@Direccion, @Disponibilidad, @Precio, @PropietarioId, @idTipo);
 			SELECT LAST_INSERT_ID();";
 			using (MySqlCommand command = new MySqlCommand(query, connection))
 			{
@@ -20,6 +20,7 @@ public class RepositorioInmueble
 				command.Parameters.AddWithValue("@Disponibilidad", inmueble.Disponibilidad);
 				command.Parameters.AddWithValue("@Precio", inmueble.Precio);
 				command.Parameters.AddWithValue("@PropietarioId", inmueble.PropietarioId);
+				command.Parameters.AddWithValue("@idTipo", inmueble.idTipo);
 				connection.Open();
 				res = Convert.ToInt32(command.ExecuteScalar());
 				inmueble.idInmueble = res;
@@ -35,7 +36,7 @@ public class RepositorioInmueble
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
 			string query = @"UPDATE inmueble SET direccion = @Direccion, disponibilidad = @Disponibilidad, 
-			precio = @Precio, propietarioId = @PropietarioId 
+			precio = @Precio, propietarioId = @PropietarioId, idTipo = @idTipo 
 			WHERE idInmueble = @idInmueble";
 			using (MySqlCommand command = new MySqlCommand(query, connection))
 			{
@@ -43,6 +44,7 @@ public class RepositorioInmueble
 				command.Parameters.AddWithValue("@Disponibilidad", inmueble.Disponibilidad);
 				command.Parameters.AddWithValue("@Precio", inmueble.Precio);
 				command.Parameters.AddWithValue("@PropietarioId", inmueble.PropietarioId);
+				command.Parameters.AddWithValue("@idTipo", inmueble.idTipo);
 				command.Parameters.AddWithValue("@idInmueble", inmueble.idInmueble);
 				connection.Open();
 				res = command.ExecuteNonQuery();
@@ -59,8 +61,9 @@ public class RepositorioInmueble
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
 			var query = @"SELECT idInmueble, propietarioId, i.direccion, precio, disponibilidad,
-			p.Nombre, p.Apellido 
+			p.Nombre, p.Apellido, ti.idTipo, ti.tipo
 			FROM inmueble i INNER JOIN propietario p ON i.propietarioId = idPropietario 
+			INNER JOIN tipo_inmueble ti ON i.idTipo = ti.idTipo
 			WHERE idInmueble = @idInmueble;";
 			using (MySqlCommand command = new MySqlCommand(query, connection))
 			{
@@ -80,6 +83,10 @@ public class RepositorioInmueble
 								idPropietario = reader.GetInt32(nameof(Inmueble.PropietarioId)),
 								Nombre = reader.GetString("Nombre"),
 								Apellido = reader.GetString("Apellido"),
+							},
+							TipoInmueble = new TipoInmueble{
+								idTipo = reader.GetInt32(nameof(TipoInmueble.idTipo)),
+								tipo = reader.GetString(nameof(TipoInmueble.tipo))
 							}
 						};
 					}
@@ -114,8 +121,9 @@ public class RepositorioInmueble
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
 			var query = @"SELECT idInmueble, propietarioId, i.direccion, precio, disponibilidad,
-			p.Nombre, p.Apellido 
-			FROM inmueble i INNER JOIN propietario p ON i.propietarioId = idPropietario;";
+			p.Nombre, p.Apellido, ti.idTipo, ti.tipo 
+			FROM inmueble i INNER JOIN propietario p ON i.propietarioId = idPropietario
+			INNER JOIN tipo_inmueble ti ON i.idTipo = ti.idTipo;";
 
 			using (MySqlCommand command = new MySqlCommand(query, connection))
 			{
@@ -135,6 +143,10 @@ public class RepositorioInmueble
 								idPropietario = reader.GetInt32(nameof(Inmueble.PropietarioId)),
 								Nombre = reader.GetString("Nombre"),
 								Apellido = reader.GetString("Apellido"),
+							},
+							TipoInmueble = new TipoInmueble{
+								idTipo = reader.GetInt32(nameof(TipoInmueble.idTipo)),
+								tipo = reader.GetString(nameof(TipoInmueble.tipo))
 							}
 						};
 						listaInmuebles.Add(inmueble);

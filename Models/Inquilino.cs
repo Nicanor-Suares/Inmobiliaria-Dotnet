@@ -38,4 +38,9 @@ public class Inquilino
 		this.Dni = dni;
 		this.Telefono = telefono;
 	}
+	
+    public override string ToString()
+    {
+        return $"{Apellido}, {Nombre}";
+    }
 }
