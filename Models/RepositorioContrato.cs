@@ -10,7 +10,7 @@ namespace Inmobiliaria_DotNet.Models;
 			int res = 0;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, InquilinoId, InmuebleId, activo)
+				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, idInquilino, idInmueble, activo)
 				VALUES (@FechaInicio, @FechaFin, @InquilinoId, @InmuebleId, @Activo);
 				SELECT LAST_INSERT_ID();";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -36,15 +36,16 @@ namespace Inmobiliaria_DotNet.Models;
 			{
 				//FIX
 				var query = @"UPDATE contrato SET fechaInicio = @FechaInicio, fechaFin = @FechaFin, 
-				InquilinoId = @InquilinoId, PropietarioId = @PropietarioId, InmuebleId = @InmuebleId, 
-				activo = @Activo WHERE idContrato = @IdContrato";
+				idInquilino = @idInquilino, idInmueble = @idInmueble, 
+				activo = @Activo WHERE idContrato = @idContrato";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@fechaInicio", contrato.FechaInicio);
 					command.Parameters.AddWithValue("@fechaFin", contrato.FechaFin);
-					command.Parameters.AddWithValue("@InquilinoId", contrato.InquilinoId);
-					command.Parameters.AddWithValue("@InmuebleId", contrato.InmuebleId);
+					command.Parameters.AddWithValue("@idInquilino", contrato.InquilinoId);
+					command.Parameters.AddWithValue("@idInmueble", contrato.InmuebleId);
 					command.Parameters.AddWithValue("@activo", contrato.Activo);
+					command.Parameters.AddWithValue("@idContrato", contrato.idContrato);
 					connection.Open();
 					res = command.ExecuteNonQuery();
 					connection.Close();
@@ -60,24 +61,25 @@ namespace Inmobiliaria_DotNet.Models;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
 				var query = @"SELECT idContrato, fechaInicio, fechaFin, 
-				InquilinoId, InmuebleId, activo FROM contrato 
-				WHERE idContrato = @IdContrato";
+				idInquilino, idInmueble, activo FROM contrato 
+				WHERE idContrato = @idContrato";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
-					command.Parameters.AddWithValue("@IdContrato", 1);
+					command.Parameters.AddWithValue("@idContrato", idContrato);
 					connection.Open();
 					using (var reader = command.ExecuteReader())
 					{
 						if (reader.Read())
 						{
-							res = new Contrato(
-								Convert.ToInt32(reader["idContrato"]),
-								Convert.ToDateTime(reader["fechaInicio"]),
-								Convert.ToDateTime(reader["fechaFin"]),
-								Convert.ToInt32(reader["InmuebleId"]),
-								Convert.ToInt32(reader["InquilinoId"]),
-								Convert.ToBoolean(reader["activo"])
-							);
+							res = new Contrato
+							{
+								idContrato = reader.GetInt32(nameof(Contrato.idContrato)),
+								FechaInicio = reader.GetDateTime(nameof(Contrato.FechaInicio)),
+								FechaFin = reader.GetDateTime(nameof(Contrato.FechaFin)),
+								InquilinoId = reader.GetInt32("idInquilino"),
+								InmuebleId = reader.GetInt32("idInmueble"),
+								Activo = reader.GetBoolean(nameof(Contrato.Activo))
+							};
 						}
 					connection.Close();
 					}
@@ -153,6 +155,5 @@ namespace Inmobiliaria_DotNet.Models;
 			}
 			return listaContratos;
 		}
-
 
 	}

@@ -120,7 +120,8 @@ namespace Inmobiliaria_DotNet.Controllers
 			}
 			catch
 			{
-				return View();
+				throw;
+				//return View();
 			}
 		}
 	}

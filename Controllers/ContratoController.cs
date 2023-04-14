@@ -30,9 +30,10 @@ namespace Inmobiliaria_DotNet.Controllers
 		}
 
 		// GET: Contrato/Details/5
-		public ActionResult Details(int id)
+		public ActionResult DetallesContrato(int id)
 		{
-				return View();
+				var contratoDetalles = Repo.BuscarContrato(id);
+				return View(contratoDetalles);
 		}
 
 		// GET: Contrato/Create
@@ -63,14 +64,20 @@ namespace Inmobiliaria_DotNet.Controllers
 				}
 				catch
 				{
-						return View();
+						ViewBag.Inquilino = repoInquilino.ListarInquilinos();
+						ViewBag.Inmueble = repoInmueble.ListarInmuebles();
+						throw;
+						//return View();
 				}
 		}
 
 		// GET: Contrato/Edit/5
 		public ActionResult EditarContrato(int id)
 		{
-				return View();
+				ViewBag.Inquilino = repoInquilino.ListarInquilinos();
+				ViewBag.Inmueble = repoInmueble.ListarInmuebles();
+				Contrato contratoEditar =  Repo.BuscarContrato(id);
+				return View(contratoEditar);
 		}
 		// POST: Contrato/Edit/5
 		[HttpPost]
@@ -86,30 +93,34 @@ namespace Inmobiliaria_DotNet.Controllers
 				}
 				catch
 				{
-						return View();
+					throw;
+					//return View();
 				}
 		}
 
 		// GET: Contrato/Delete/5
-		public ActionResult Delete(int id)
+		[HttpGet]
+		public ActionResult BorrarContrato(int id)
 		{
-				return View();
+				var contratoBorrar = Repo.BuscarContrato(id);
+				return View(contratoBorrar);
 		}
 
 		// POST: Contrato/Delete/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public ActionResult Delete(int id, IFormCollection collection)
+		public ActionResult BorrarContrato(int id, IFormCollection collection)
 		{
 				try
 				{
 						// TODO: Add delete logic here
-
+						Repo.BorrarContrato(id);
 						return RedirectToAction(nameof(Index));
 				}
 				catch
 				{
-						return View();
+						throw;
+						//return View();
 				}
 		}
 	}
