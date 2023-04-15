@@ -7,7 +7,6 @@ using System.ComponentModel.DataAnnotations;
   public class Contrato
   {
     [Display(Name = "Código Contrato")]
-
     public int idContrato { get; set; }
     [Display(Name = "Fecha de Inicio")]
     public DateTime FechaInicio { get; set; }
@@ -58,6 +57,11 @@ using System.ComponentModel.DataAnnotations;
       InquilinoId = InquilinoId;
       Activo = activo;
     }
+
+	public override string ToString()
+	{
+			return $"Código: {idContrato} Inmueble: {InmuebleContrato.Direccion} Inquilino: {InquilinoContrato.Nombre} {InquilinoContrato.Apellido}";
+	}
 
   }
     

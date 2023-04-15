@@ -1,0 +1,53 @@
+@model Inmobiliaria_DotNet.Models.Pago
+
+@{
+    ViewData["Title"] = "EditarPago";
+    var listaContratos = (IList<Contrato>)ViewBag.Contrato;
+}
+
+<h1>EditarPago</h1>
+
+<h4>Pago</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarPago">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			@Html.HiddenFor(model => model.IdPago)
+            <div class="form-group">
+				<label asp-for="IdContrato" class="control-label">Contrato</label>
+				<select class="form-control" name="IdContrato">
+					<option value="" disabled selected>Seleccione el contrato</option>
+					@foreach (var item in listaContratos)
+					{
+                        @:<option @(item.idContrato == Model.IdContrato ? "selected" : "") value="@item.idContrato">@(item.ToString()) </option>
+					}
+				</select>
+				<span asp-validation-for="IdContrato" class="text-danger"></span>
+			</div>
+            <div class="form-group">
+                <label asp-for="FechaPago" class="control-label"></label>
+                <input asp-for="FechaPago" class="form-control" />
+                <span asp-validation-for="FechaPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Monto" class="control-label"></label>
+                <input asp-for="Monto" class="form-control" />
+                <span asp-validation-for="Monto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nroPago" class="control-label"></label>
+                <input asp-for="nroPago" class="form-control" value="@Model.nroPago" readonly/>
+                <span asp-validation-for="nroPago" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

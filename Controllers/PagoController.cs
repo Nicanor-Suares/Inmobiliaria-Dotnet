@@ -4,89 +4,112 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Inmobiliaria_DotNet.Models;
 
 namespace Inmobiliaria_DotNet.Controllers
 {
     public class PagoController : Controller
     {
+        private readonly RepositorioPago Repo;
+        private readonly RepositorioInmueble repoInmueble;
+        private readonly RepositorioContrato repoContrato;
+        
+        public PagoController()
+        {
+            Repo = new RepositorioPago();
+            repoInmueble = new RepositorioInmueble();
+            repoContrato = new RepositorioContrato();
+        }
+
         // GET: Pago
         public ActionResult Index()
         {
-            return View();
+            var lista = Repo.ListarPagos();
+            return View(lista);
         }
 
         // GET: Pago/Details/5
-        public ActionResult Details(int id)
+        public ActionResult DetallesPago(int id)
         {
-            return View();
+            var detallesPago = Repo.BuscarPago(id);
+            return View(detallesPago);
         }
 
         // GET: Pago/Create
-        public ActionResult Create()
+        public ActionResult AltaPago()
         {
+            ViewBag.Contrato = repoContrato.ListarContratos();
             return View();
         }
 
         // POST: Pago/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult AltaPago(Pago pago)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                Repo.AltaPago(pago);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                throw;
+                //return View();
             }
         }
 
         // GET: Pago/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditarPago(int id)
         {
-            return View();
+            ViewBag.Contrato = repoContrato.ListarContratos();
+            Pago pagoEditar = Repo.BuscarPago(id);
+            return View(pagoEditar);
         }
 
         // POST: Pago/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult EditarPago(int id, Pago pago)
         {
             try
             {
                 // TODO: Add update logic here
-
+                pago.IdPago = id;
+                Repo.EditarPago(pago);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                throw;
+                //return View();
             }
         }
 
         // GET: Pago/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult BorrarPago(int id)
         {
-            return View();
+            ViewBag.Contrato = repoContrato.BuscarContrato(id);
+            var pagoBorrar = Repo.BuscarPago(id);
+            return View(pagoBorrar);
         }
 
         // POST: Pago/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult BorrarPago(int id, IFormCollection collection)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                Repo.BorrarPago(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                throw;
+                //return View();
             }
         }
     }
