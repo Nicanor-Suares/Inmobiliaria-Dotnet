@@ -1,0 +1,68 @@
+@model IEnumerable<Inmobiliaria_DotNet.Models.Usuario>
+
+@{
+	ViewData["Title"] = "Usuarios";
+}
+
+<div class="d-flex align-items-center justify-content-between">
+	<h1>Usuarios</h1>
+	<a asp-action="AltaUsuario" class="btn btn-primary">Crear Usuario</a>
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.avatar)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.nombre)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.apellido)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.email)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.rol)
+			</th>
+			<th>
+				Acciones
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@{
+						var usuarioAvatar = item.avatar != null && item.avatar != "" ? item.avatar : "/img/default_avatar.jpg";
+					}
+						<img width="40" src="@usuarioAvatar">
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.nombre)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.apellido)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.email)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.RolNombre)
+				</td>
+				<td>
+					<a href='@Url.Action("Edit", new { id = item.idUsuario })' class="btn btn-sm btn-info">
+						<i class="fa-solid fa-pencil"></i>
+					</a>
+					<a href='@Url.Action("Delete", new { id = item.idUsuario })' class="btn btn-sm btn-danger">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

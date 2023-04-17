@@ -1,0 +1,83 @@
+@model Inmobiliaria_DotNet.Models.Usuario
+
+@{
+	ViewData["Title"] = "Editar";
+
+	var usuarioavatar = Model.avatar != null && Model.avatar != "" ? Model.avatar : "/img/default_avatar.jpg";
+}
+
+@if (User.Identity.Name == Model.email)
+{
+	<a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-light">
+		<i class="fa-solid fa-chevron-left"></i> Volver al inicio
+	</a>
+}
+else
+{
+	<a asp-action="Index" class="btn btn-sm btn-light">
+		<i class="fa-solid fa-chevron-left"></i> Volver a la lista
+	</a>
+}
+
+<h1>Editar Usuario</h1>
+<h4>Usuario</h4>
+
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Edit" enctype="multipart/form-data">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			@Html.HiddenFor(model => model.idUsuario)
+			<div class="form-group">
+				<label asp-for="nombre" class="control-label"></label>
+				<input asp-for="nombre" class="form-control" />
+				<span asp-validation-for="nombre" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="apellido" class="control-label"></label>
+				<input asp-for="apellido" class="form-control" />
+				<span asp-validation-for="apellido" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="email" class="control-label"></label>
+				<input asp-for="email" class="form-control" />
+				<span asp-validation-for="email" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="password" class="control-label"></label>
+				<input asp-for="password" type="password" class="form-control" />
+				<span asp-validation-for="password" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="confirmPassword" class="control-label"></label>
+				<input asp-for="confirmPassword" type="password" class="form-control" />
+				<span asp-validation-for="confirmPassword" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="avatar" class="control-label"></label>
+				<input class="form-control" type="file" name="AvatarFile" />
+				<span asp-validation-for="AvatarFile" class="text-danger"></span>
+			</div>
+			@if (User.IsInRole("Administrador"))
+			{
+				<div class="form-group">
+					<label asp-for="rol" class="control-label"></label>
+					<select name="rol" id="rol" class="form-control">
+						@foreach (var keyValue in (IDictionary<int, string>)ViewBag.Roles)
+						{
+							@:<option @(keyValue.Key == Model.rol ? "selected" : "") value="@keyValue.Key">@keyValue.Value</option>
+						}
+					</select>
+					<span asp-validation-for="rol" class="text-danger"></span>
+				</div>
+			}
+			<div class="form-group">
+				<input type="submit" value="Guardar" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+
+	<div class="col-md-8">
+			<img src="@usuarioavatar">
+	</div>
+</div>

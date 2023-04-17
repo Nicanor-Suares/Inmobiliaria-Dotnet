@@ -1,0 +1,52 @@
+@model Inmobiliaria_DotNet.Models.Usuario
+
+@{
+	ViewData["Title"] = "Eliminar";
+
+	var usuarioAvatar = Model.avatar != null && Model.avatar != "" ? Model.avatar : "/img/user_avatar.jpg";
+}
+
+<h1>Eliminación</h1>
+
+<h3>¿Eliminar Usuario?</h3>
+<div>
+	<hr />
+	<dl class="row">
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.nombre)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.nombre)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.apellido)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.apellido)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.email)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.email)
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.avatar)
+		</dt>
+		<dd class="col-sm-10">
+			<div class="form-avatar">
+				<img src="@usuarioAvatar">
+			</div>
+		</dd>
+		<dt class="col-sm-2">
+			@Html.DisplayNameFor(model => model.rol)
+		</dt>
+		<dd class="col-sm-10">
+			@Html.DisplayFor(model => model.RolNombre)
+		</dd>
+	</dl>
+
+	<form asp-action="BorrarUsuario">
+		<input type="submit" value="Delete" class="btn btn-danger" />
+	</form>
+</div>
