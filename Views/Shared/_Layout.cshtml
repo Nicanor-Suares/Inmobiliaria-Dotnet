@@ -45,8 +45,8 @@
                                 </li>
                                 @if (User.IsInRole("Administrador"))
                                 {
-                                    <li>
-                                        <a asp-area="" asp-controller="Usuario" asp-action="Index"><i class="fa-solid fa-users"></i>Usuarios</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Usuario" asp-action="Index"><i class="fa-solid fa-users"></i>Usuarios</a>
                                     </li>
                                 }
                             </ul>

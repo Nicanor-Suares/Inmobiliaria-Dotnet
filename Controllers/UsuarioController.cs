@@ -108,9 +108,9 @@ namespace Inmobiliaria_DotNet.Controllers
           Database db = repoDB.GetDatabase();
           // Instanciar objeto que contiene funciones de subida de foto de perfil
           var cloud = new RepositorioCloud(db.connection_string, db.container);
-
 					string fileName = $"avatar_{usuario.idUsuario + Path.GetExtension(usuario.AvatarFile.FileName)}";
           var imageUrl = await cloud.SubirAvatarAsync(fileName, usuario.AvatarFile);
+          usuario.avatar = imageUrl;
 					Repo.ModificarAvatar(usuario);
 				}
 				return RedirectToAction(nameof(Index));
@@ -213,7 +213,7 @@ namespace Inmobiliaria_DotNet.Controllers
 
 				usuario.rol = User.IsInRole("Administrador") ? usuario.rol : (int)enRoles.Empleado;
 
-				int res = Repo.Modificar(usuario);
+				int res = Repo.ModificarUsuario(usuario);
 				if (usuario.AvatarFile != null && usuario.idUsuario > 0)
 				{
           Database db = repoDB.GetDatabase();

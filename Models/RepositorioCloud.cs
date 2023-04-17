@@ -25,8 +25,7 @@ public class RepositorioCloud {
         //Si ya existe, la borra
         await blobClient.DeleteIfExistsAsync();
 
-        var fileExtension = Path.GetExtension(file.FileName);
-        blobClient = containerClient.GetBlobClient(fileName + fileExtension);
+        blobClient = containerClient.GetBlobClient(fileName);
         await blobClient.UploadAsync(file.OpenReadStream(), new BlobUploadOptions
         {
             HttpHeaders = new BlobHttpHeaders { ContentType = file.ContentType }

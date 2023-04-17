@@ -56,7 +56,7 @@ public class RepositorioUsuario
 		return res;
 	}
 
-	public int Modificar(Usuario usuario)
+	public int ModificarUsuario(Usuario usuario)
 	{
 		int res = 0;
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
