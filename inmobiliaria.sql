@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2023 at 10:31 PM
+-- Generation Time: Apr 17, 2023 at 06:26 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.3.33
 
@@ -44,6 +44,26 @@ INSERT INTO `contrato` (`idContrato`, `fechaInicio`, `fechaFin`, `activo`, `idIn
 (15, '2022-07-15', '2022-08-31', 1, 6, 5),
 (16, '2023-03-25', '2023-03-25', 1, 1, 1),
 (18, '2023-04-14', '2023-09-07', 1, 5, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `db_config`
+--
+
+CREATE TABLE `db_config` (
+  `id` int(11) NOT NULL,
+  `container` varchar(255) NOT NULL,
+  `access_key` varchar(255) NOT NULL,
+  `connection_string` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `db_config`
+--
+
+INSERT INTO `db_config` (`id`, `container`, `access_key`, `connection_string`) VALUES
+(1, 'inmobiliaria', 'teVIUuDIYWgF/FrTt4VQAyCHEO5oIemGSrjMZAG9jvYVCV+fkll3Fit8QGSNjvo8gF9ezG9aIBEG+AStvJ69ag==', 'DefaultEndpointsProtocol=https;AccountName=inmobiliariadotnet;AccountKey=teVIUuDIYWgF/FrTt4VQAyCHEO5oIemGSrjMZAG9jvYVCV+fkll3Fit8QGSNjvo8gF9ezG9aIBEG+AStvJ69ag==;EndpointSuffix=core.windows.net');
 
 -- --------------------------------------------------------
 
@@ -169,6 +189,31 @@ INSERT INTO `tipo_inmueble` (`idTipo`, `tipo`) VALUES
 (3, 'casa'),
 (4, 'comercio');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` longtext NOT NULL,
+  `avatar` longtext DEFAULT NULL,
+  `rol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nombre`, `apellido`, `email`, `password`, `avatar`, `rol`) VALUES
+(1, 'Anastasia', 'Lacoste', 'ana@gmail.com', 'HV2s7lkLDX2gPg1NM6rby0Tdu8rZekNdKAjNJLH/y04=', 'https://inmobiliariadotnet.blob.core.windows.net/inmobiliaria/avatar_1.jpg', 2),
+(2, 'Nicanor', 'Suares', 'nica@gmail.com', 'hu6RmnSuMUNPnMBLN80iZErOPWTK2Qx3kUuWloI3xTM=', 'https://inmobiliariadotnet.blob.core.windows.net/inmobiliaria/avatar_2.jpg', 2),
+(11, 'test', 'pfp', 'test@gmail.com', 'w/yoamzwQ/EpI09wffC/MwTRHLnaDLu8+d1cxsD6jMs=', 'https://inmobiliariadotnet.blob.core.windows.net/inmobiliaria/avatar_11.jpg.jpg', 1);
+
 --
 -- Indexes for dumped tables
 --
@@ -180,6 +225,12 @@ ALTER TABLE `contrato`
   ADD PRIMARY KEY (`idContrato`),
   ADD KEY `inquilinoContrato` (`idInquilino`),
   ADD KEY `propiedadContrato` (`idInmueble`);
+
+--
+-- Indexes for table `db_config`
+--
+ALTER TABLE `db_config`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `inmueble`
@@ -217,6 +268,13 @@ ALTER TABLE `tipo_inmueble`
   ADD PRIMARY KEY (`idTipo`);
 
 --
+-- Indexes for table `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -225,6 +283,12 @@ ALTER TABLE `tipo_inmueble`
 --
 ALTER TABLE `contrato`
   MODIFY `idContrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `db_config`
+--
+ALTER TABLE `db_config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `inmueble`
@@ -255,6 +319,12 @@ ALTER TABLE `propietario`
 --
 ALTER TABLE `tipo_inmueble`
   MODIFY `idTipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
