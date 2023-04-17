@@ -1,53 +1,54 @@
 @model Inmobiliaria_DotNet.Models.Inmueble
 
 @{
-    ViewData["Title"] = "DetallesInmueble";
+	ViewData["Title"] = "DetallesInmueble";
 }
+
+<a asp-action="Index" class="btn btn-sm btn-light">
+	<i class="fa-solid fa-chevron-left"></i> Volver a la lista
+</a>
 
 <h1>Detalles del Inmueble</h1>
 
 <div>
-    <h4>Inmueble</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.idInmueble)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.idInmueble)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Disponibilidad)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Disponibilidad)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Precio)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Precio)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PropietarioInmueble)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PropietarioInmueble)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Direccion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Direccion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoInmueble)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoInmueble)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
+	<h4>Inmueble</h4>
+	<hr />
+	<dl class="row">
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.idInmueble)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.idInmueble)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.Disponibilidad)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.Disponibilidad)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.Precio)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.Precio)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.PropietarioInmueble)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.PropietarioInmueble)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.Direccion)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.Direccion)
+		</dd>
+		<dt class = "col-sm-2">
+			@Html.DisplayNameFor(model => model.TipoInmueble)
+		</dt>
+		<dd class = "col-sm-10">
+			@Html.DisplayFor(model => model.TipoInmueble)
+		</dd>
+	</dl>
 </div>

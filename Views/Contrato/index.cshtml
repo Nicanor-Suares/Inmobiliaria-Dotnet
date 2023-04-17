@@ -1,77 +1,80 @@
 @model IEnumerable<Inmobiliaria_DotNet.Models.Contrato>
 
 @{
-    ViewData["Title"] = "index";
+	ViewData["Title"] = "Listar Contratos";
 }
 
 <h1>Lista de Contratos</h1>
 
 <p>
-    <a asp-action="AltaContrato" class="btn btn-primary">Agregar Contrato</a>
+	<a asp-action="AltaContrato" class="btn btn-primary">Agregar Contrato</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idContrato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InmuebleId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InquilinoContrato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InmuebleContrato.PropietarioInmueble)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Activo)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.idContrato)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FechaInicio)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.FechaFin)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.InmuebleId)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.InquilinoContrato)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.InmuebleContrato.PropietarioInmueble)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Activo)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.idContrato)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaFin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InmuebleId)
-            </td>
-            <td>
-                 @(item.InquilinoContrato.Nombre + " " + item.InquilinoContrato.Apellido)
-            </td>
-            <td>
-                 @(item.InmuebleContrato.PropietarioInmueble.Nombre + " " + item.InmuebleContrato.PropietarioInmueble.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activo)
-            </td>
-            <td>
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.idContrato)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FechaInicio)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.FechaFin)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.InmuebleId)
+			</td>
+			<td>
+				 @(item.InquilinoContrato.Nombre + " " + item.InquilinoContrato.Apellido)
+			</td>
+			<td>
+				 @(item.InmuebleContrato.PropietarioInmueble.Nombre + " " + item.InmuebleContrato.PropietarioInmueble.Apellido)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Activo)
+			</td>
+			<td>
 				<a href='@Url.Action("EditarContrato", new { id = item.idContrato })' class="btn btn-sm btn-info">
 					<i class="fa fa-pencil"></i>
 				</a>
 				<a href='@Url.Action("DetallesContrato", new { id = item.idContrato })' class="btn btn-sm btn-warning">
 					<i class="fa fa-circle-info"></i>
 				</a>
-				<a href='@Url.Action("BorrarContrato", new { id = item.idContrato })' class="btn btn-sm btn-danger">
-					<i class="fa-solid fa-trash"></i>
-				</a>
-            </td>
-        </tr>
+				@if (User.IsInRole("Administrador"))
+				{
+					<a href='@Url.Action("BorrarContrato", new { id = item.idContrato })' class="btn btn-sm btn-danger">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				}
+			</td>
+		</tr>
 }
-    </tbody>
+	</tbody>
 </table>

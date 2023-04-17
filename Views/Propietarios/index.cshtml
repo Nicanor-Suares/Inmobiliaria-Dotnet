@@ -1,7 +1,7 @@
 @model IEnumerable<Inmobiliaria_DotNet.Models.Propietario>
 
 @{
-	ViewData["Title"] = "ListarPropietarios";
+	ViewData["Title"] = "Listar Propietarios";
 }
 
 <h1>Lista de Propietarios</h1>
@@ -61,9 +61,12 @@
 				<a href='@Url.Action("DetallesPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-warning">
 					<i class="fa fa-circle-info"></i>
 				</a>
-				<a href='@Url.Action("BorrarPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-danger">
-					<i class="fa-solid fa-trash"></i>
-				</a>
+				@if (User.IsInRole("Administrador"))
+				{
+					<a href='@Url.Action("BorrarPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-danger">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				}
 			</td>
 		</tr>
 }

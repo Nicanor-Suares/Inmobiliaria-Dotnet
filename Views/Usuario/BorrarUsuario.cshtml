@@ -3,10 +3,14 @@
 @{
 	ViewData["Title"] = "Eliminar";
 
-	var usuarioAvatar = Model.avatar != null && Model.avatar != "" ? Model.avatar : "/img/user_avatar.jpg";
+	var usuarioAvatar = Model.avatar != null && Model.avatar != "" ? Model.avatar : "/img/default_avatar.jpg";
 }
 
-<h1>Eliminación</h1>
+<a asp-action="Index" class="btn btn-sm btn-light">
+	<i class="fa-solid fa-chevron-left"></i> Volver a la lista
+</a>
+
+<h1>Borrar Usuario</h1>
 
 <h3>¿Eliminar Usuario?</h3>
 <div>

@@ -1,65 +1,68 @@
 @model IEnumerable<Inmobiliaria_DotNet.Models.Pago>
 
 @{
-    ViewData["Title"] = "ListarPagos";
+		ViewData["Title"] = "Listar Pagos";
 }
 
-<h1>Listar Pagos</h1>
+<h1>Lista de Pagos</h1>
 
 <p>
-    <a asp-action="AltaPago" class="btn btn-primary">Agregar Pago</a>
+		<a asp-action="AltaPago" class="btn btn-primary">Agregar Pago</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdContrato)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaPago)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Monto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.nroPago)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+		<thead>
+				<tr>
+						<th>
+								@Html.DisplayNameFor(model => model.IdPago)
+						</th>
+						<th>
+								@Html.DisplayNameFor(model => model.IdContrato)
+						</th>
+						<th>
+								@Html.DisplayNameFor(model => model.FechaPago)
+						</th>
+						<th>
+								@Html.DisplayNameFor(model => model.Monto)
+						</th>
+						<th>
+								@Html.DisplayNameFor(model => model.nroPago)
+						</th>
+						<th></th>
+				</tr>
+		</thead>
+		<tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdContrato)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaPago)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Monto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nroPago)
-            </td>
-            <td>
+				<tr>
+						<td>
+								@Html.DisplayFor(modelItem => item.IdPago)
+						</td>
+						<td>
+								@Html.DisplayFor(modelItem => item.IdContrato)
+						</td>
+						<td>
+								@Html.DisplayFor(modelItem => item.FechaPago)
+						</td>
+						<td>
+								@Html.DisplayFor(modelItem => item.Monto)
+						</td>
+						<td>
+								@Html.DisplayFor(modelItem => item.nroPago)
+						</td>
+						<td>
 				<a href='@Url.Action("EditarPago", new { id = item.IdPago })' class="btn btn-sm btn-info">
 					<i class="fa fa-pencil"></i>
 				</a>
 				<a href='@Url.Action("DetallesPago", new { id = item.IdPago })' class="btn btn-sm btn-warning">
 					<i class="fa fa-circle-info"></i>
 				</a>
-				<a href='@Url.Action("BorrarPago", new { id = item.IdPago })' class="btn btn-sm btn-danger">
-					<i class="fa-solid fa-trash"></i>
-				</a>
-            </td>
-        </tr>
+						@if (User.IsInRole("Administrador"))
+						{
+							<a href='@Url.Action("BorrarPago", new { id = item.IdPago })' class="btn btn-sm btn-danger">
+									<i class="fa-solid fa-trash"></i>
+							</a>
+						}
+					</td>
+				</tr>
 }
-    </tbody>
+		</tbody>
 </table>

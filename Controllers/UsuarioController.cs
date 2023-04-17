@@ -20,7 +20,7 @@ namespace Inmobiliaria_DotNet.Controllers
 		private IWebHostEnvironment environment;
 		private string hashSalt = "";
 		private RepositorioUsuario Repo;
-    private RepositorioDB repoDB;
+		private RepositorioDB repoDB;
 
 		public UsuarioController(IConfiguration configuration, IWebHostEnvironment environment)
 		{
@@ -28,7 +28,7 @@ namespace Inmobiliaria_DotNet.Controllers
 			this.environment = environment;
 			this.hashSalt = configuration["Salt"] ?? "";
 			this.Repo = new RepositorioUsuario();
-      this.repoDB = new RepositorioDB();
+			this.repoDB = new RepositorioDB();
 		}
 
 		// GET: Usuarios
@@ -40,19 +40,19 @@ namespace Inmobiliaria_DotNet.Controllers
 		}
 
 		// GET: Usuarios/Create
-    [HttpGet]
+		[HttpGet]
 		//[Authorize(Policy = "Administrador")]
 		public ActionResult AltaUsuario()
 		{
-      try
-      {
-       	ViewBag.Roles = Usuario.ObtenerRoles();
-			  return View(); 
-      }
-      catch (System.Exception)
-      {
-        throw;
-      }
+			try
+			{
+			 	ViewBag.Roles = Usuario.ObtenerRoles();
+				return View(); 
+			}
+			catch (System.Exception)
+			{
+				throw;
+			}
 		}
 
 		// POST: Usuarios/Create
@@ -74,7 +74,7 @@ namespace Inmobiliaria_DotNet.Controllers
 				{
 					//ModelState.AddModelError("Email", "El email ingresado ya existe");
 					Console.WriteLine("El email ingresado ya existe");
-          //ViewBag.Error = "El email ingresado ya existe";
+					//ViewBag.Error = "El email ingresado ya existe";
 					//ViewBag.Roles = Usuario.ObtenerRoles();
 					return View();
 				}
@@ -85,7 +85,7 @@ namespace Inmobiliaria_DotNet.Controllers
 					// ModelState.AddModelError("ConfirmPassword", "Las contraseñas no coinciden");
 					// ViewBag.Error = "Las contraseñas no coinciden";
 					// ViewBag.Roles = Usuario.ObtenerRoles();
-          Console.WriteLine("Las contraseñas no coinciden");
+					Console.WriteLine("Las contraseñas no coinciden");
 					return View();
 				}
 
@@ -102,15 +102,15 @@ namespace Inmobiliaria_DotNet.Controllers
 
 				int res = Repo.AltaUsuario(usuario);
 				Repo.ModificarContraseña(usuario);
-        
+				
 				if (usuario.AvatarFile != null && usuario.idUsuario > 0)
 				{
-          Database db = repoDB.GetDatabase();
-          // Instanciar objeto que contiene funciones de subida de foto de perfil
-          var cloud = new RepositorioCloud(db.connection_string, db.container);
+					Database db = repoDB.GetDatabase();
+					// Instanciar objeto que contiene funciones de subida de foto de perfil
+					var cloud = new RepositorioCloud(db.connection_string, db.container);
 					string fileName = $"avatar_{usuario.idUsuario + Path.GetExtension(usuario.AvatarFile.FileName)}";
-          var imageUrl = await cloud.SubirAvatarAsync(fileName, usuario.AvatarFile);
-          usuario.avatar = imageUrl;
+					var imageUrl = await cloud.SubirAvatarAsync(fileName, usuario.AvatarFile);
+					usuario.avatar = imageUrl;
 					Repo.ModificarAvatar(usuario);
 				}
 				return RedirectToAction(nameof(Index));
@@ -119,7 +119,7 @@ namespace Inmobiliaria_DotNet.Controllers
 			{
 				// ViewBag.Roles = Usuario.ObtenerRoles();
 				// return View();
-        throw;
+				throw;
 			}
 		}
 
@@ -173,7 +173,7 @@ namespace Inmobiliaria_DotNet.Controllers
 					// ModelState.AddModelError("Email", "El email ingresado ya existe");
 					// ViewBag.Error = "Email no puede coincidir con otro usuario";
 					// ViewBag.Roles = Usuario.ObtenerRoles();
-          Console.WriteLine("El email ingresado ya existe");
+					Console.WriteLine("El email ingresado ya existe");
 					return View(usuarioDB);
 				}
 
@@ -186,7 +186,7 @@ namespace Inmobiliaria_DotNet.Controllers
 						// ModelState.AddModelError("ConfirmPassword", "No puede ser vacia");
 						// ViewBag.Error = "Confirmacion vacia";
 						// ViewBag.Roles = Usuario.ObtenerRoles();
-            Console.WriteLine("Confirmacion vacia");
+						Console.WriteLine("Confirmacion vacia");
 						return View(usuarioDB);
 					}
 
@@ -195,7 +195,7 @@ namespace Inmobiliaria_DotNet.Controllers
 						// ModelState.AddModelError("ConfirmPassword", "Las contraseñas no coinciden");
 						// ViewBag.Error = "Las contraseñas no coinciden";
 						// ViewBag.Roles = Usuario.ObtenerRoles();
-          	Console.WriteLine("Las contraseñas no coinciden");
+						Console.WriteLine("Las contraseñas no coinciden");
 						return View(usuarioDB);
 					}
 
@@ -216,12 +216,12 @@ namespace Inmobiliaria_DotNet.Controllers
 				int res = Repo.ModificarUsuario(usuario);
 				if (usuario.AvatarFile != null && usuario.idUsuario > 0)
 				{
-          Database db = repoDB.GetDatabase();
-          // Instanciar objeto que contiene funciones de subida de foto de perfil
-          var cloud = new RepositorioCloud(db.connection_string, db.container);
+					Database db = repoDB.GetDatabase();
+					// Instanciar objeto que contiene funciones de subida de foto de perfil
+					var cloud = new RepositorioCloud(db.connection_string, db.container);
 					string fileName = $"avatar_{usuario.idUsuario + Path.GetExtension(usuario.AvatarFile.FileName)}";
-          var imageUrl = await cloud.SubirAvatarAsync(fileName, usuario.AvatarFile);
-          usuario.avatar = imageUrl;
+					var imageUrl = await cloud.SubirAvatarAsync(fileName, usuario.AvatarFile);
+					usuario.avatar = imageUrl;
 					Repo.ModificarAvatar(usuario);
 				}
 
@@ -280,11 +280,11 @@ namespace Inmobiliaria_DotNet.Controllers
 				var user = Repo.BuscarUsuarioPorId(id);
 				
 				// Borrar la foto si existe
-        if (user.avatar != null){          
-          Database db = repoDB.GetDatabase();
-          var cloud = new RepositorioCloud(db.connection_string, db.container);
-          await cloud.BorrarAvatar(user.avatar);
-        }
+				if (user.avatar != null){          
+					Database db = repoDB.GetDatabase();
+					var cloud = new RepositorioCloud(db.connection_string, db.container);
+					await cloud.BorrarAvatar(user.avatar);
+				}
 
 				Repo.Eliminar(id);
 				return RedirectToAction(nameof(Index));
@@ -299,15 +299,15 @@ namespace Inmobiliaria_DotNet.Controllers
 		[AllowAnonymous]
 		public ActionResult Login(string returnUrl)
 		{
-      try
-      {
-       	TempData["returnUrl"] = returnUrl;
-			  return View();
-      }
-      catch (System.Exception)
-      {
-        throw;
-      }
+			try
+			{
+			 	TempData["returnUrl"] = returnUrl;
+				return View();
+			}
+			catch (System.Exception)
+			{
+				throw;
+			}
 		}
 
 		// POST: Usuarios/Login
@@ -336,7 +336,7 @@ namespace Inmobiliaria_DotNet.Controllers
 					{
 						//ModelState.AddModelError("", "Usuario o contraseña incorrectos");
 						Console.WriteLine("Usuario o contraseña incorrectos");
-            TempData["returnUrl"] = returnUrl;
+						TempData["returnUrl"] = returnUrl;
 						return View();
 					}
 

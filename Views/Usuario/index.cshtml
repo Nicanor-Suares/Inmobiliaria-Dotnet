@@ -58,9 +58,12 @@
 					<a href='@Url.Action("EditarUsuario", new { id = item.idUsuario })' class="btn btn-sm btn-info">
 						<i class="fa-solid fa-pencil"></i>
 					</a>
-					<a href='@Url.Action("BorrarUsuario", new { id = item.idUsuario })' class="btn btn-sm btn-danger">
-						<i class="fa-solid fa-trash"></i>
-					</a>
+					@if (User.IsInRole("Administrador"))
+					{
+						<a href='@Url.Action("BorrarUsuario", new { id = item.idUsuario })' class="btn btn-sm btn-danger">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					}
 				</td>
 			</tr>
 		}

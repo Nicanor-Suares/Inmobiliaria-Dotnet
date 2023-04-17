@@ -1,71 +1,74 @@
 @model IEnumerable<Inmobiliaria_DotNet.Models.Inmueble>
 
 @{
-    ViewData["Title"] = "ListarInmuebles";
+	ViewData["Title"] = "Listar Inmuebles";
 }
 
 <h1>Lista de Inmuebles</h1>
 
 <p>
-    <a asp-action="AltaInmueble" class="btn btn-primary">Agregar Inmueble</a>
+	<a asp-action="AltaInmueble" class="btn btn-primary">Agregar Inmueble</a>
 </p>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.idInmueble)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Disponibilidad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Precio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PropietarioInmueble)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoInmueble)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.idInmueble)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Direccion)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Disponibilidad)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Precio)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PropietarioInmueble)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TipoInmueble)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.idInmueble)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Disponibilidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                @(item.PropietarioInmueble.Nombre + " " + item.PropietarioInmueble.Apellido)
-            </td>
-            <td>
-                @(item.TipoInmueble.tipo)
-            </td>
-            <td>
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.idInmueble)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Direccion)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Disponibilidad)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Precio)
+			</td>
+			<td>
+				@(item.PropietarioInmueble.Nombre + " " + item.PropietarioInmueble.Apellido)
+			</td>
+			<td>
+				@(item.TipoInmueble.tipo)
+			</td>
+			<td>
 				<a href='@Url.Action("EditarInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-info">
 					<i class="fa fa-pencil"></i>
 				</a>
 				<a href='@Url.Action("DetallesInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-warning">
 					<i class="fa fa-circle-info"></i>
 				</a>
-				<a href='@Url.Action("BorrarInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-danger">
-					<i class="fa-solid fa-trash"></i>
-				</a>
-            </td>
-        </tr>
+				 @if (User.IsInRole("Administrador"))
+				{
+					<a href='@Url.Action("BorrarInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-danger">
+						<i class="fa-solid fa-trash"></i>
+					</a>
+				}
+			</td>
+		</tr>
 }
-    </tbody>
+	</tbody>
 </table>

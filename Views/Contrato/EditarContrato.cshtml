@@ -1,55 +1,54 @@
 @model Inmobiliaria_DotNet.Models.Contrato
 
 @{
-    ViewData["Title"] = "EditarContrato";
+	ViewData["Title"] = "EditarContrato";
 }
+
+<a asp-action="Index" class="btn btn-sm btn-light">
+	<i class="fa-solid fa-chevron-left"></i> Volver a la lista
+</a>
 
 <h1>EditarContrato</h1>
 
 <h4>Contrato</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditarContrato">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="idContrato" class="control-label"></label>
-                <input asp-for="idContrato" class="form-control" />
-                <span asp-validation-for="idContrato" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaInicio" class="control-label"></label>
-                <input asp-for="FechaInicio" class="form-control" />
-                <span asp-validation-for="FechaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FechaFin" class="control-label"></label>
-                <input asp-for="FechaFin" class="form-control" />
-                <span asp-validation-for="FechaFin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InmuebleId" class="control-label"></label>
-                <input asp-for="InmuebleId" class="form-control" />
-                <span asp-validation-for="InmuebleId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InquilinoId" class="control-label"></label>
-                <input asp-for="InquilinoId" class="form-control" />
-                <span asp-validation-for="InquilinoId" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4">
+		<form asp-action="EditarContrato">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="idContrato" class="control-label"></label>
+				<input asp-for="idContrato" class="form-control" />
+				<span asp-validation-for="idContrato" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="FechaInicio" class="control-label"></label>
+				<input asp-for="FechaInicio" class="form-control" />
+				<span asp-validation-for="FechaInicio" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="FechaFin" class="control-label"></label>
+				<input asp-for="FechaFin" class="form-control" />
+				<span asp-validation-for="FechaFin" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="InmuebleId" class="control-label"></label>
+				<input asp-for="InmuebleId" class="form-control" />
+				<span asp-validation-for="InmuebleId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="InquilinoId" class="control-label"></label>
+				<input asp-for="InquilinoId" class="form-control" />
+				<span asp-validation-for="InquilinoId" class="text-danger"></span>
+			</div>
+			<div class="form-group form-check">
+				<label class="form-check-label">
+					<input class="form-check-input" asp-for="Activo" /> @Html.DisplayNameFor(model => model.Activo)
+				</label>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Save" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

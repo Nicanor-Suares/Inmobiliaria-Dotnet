@@ -37,7 +37,7 @@ public class Propietario
 		this.Telefono = telefono;
 	}
 
-   public Propietario(string nombre, string apellido, string dni, string direccion, string telefono) {
+	 public Propietario(string nombre, string apellido, string dni, string direccion, string telefono) {
 		this.idPropietario = idPropietario;
 		this.Nombre = nombre;
 		this.Apellido = apellido;
@@ -46,10 +46,10 @@ public class Propietario
 		this.Telefono = telefono;
 	}
 
-  public override string ToString()
-  {
-    return $"{Nombre} {Apellido}";
-  }
+	public override string ToString()
+	{
+		return $"{Nombre} {Apellido}";
+	}
 
 
 }

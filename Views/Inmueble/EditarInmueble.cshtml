@@ -6,6 +6,10 @@
 	var listaTipos = (IList<TipoInmueble>)ViewBag.TipoInmueble;
 }
 
+<a asp-action="Index" class="btn btn-sm btn-light">
+	<i class="fa-solid fa-chevron-left"></i> Volver a la lista
+</a>
+
 <h1>Editar Inmueble</h1>
 
 <h4>Inmueble</h4>
@@ -57,9 +61,5 @@
 			</div>
 		</form>
 	</div>
-</div>
-
-<div>
-	<a asp-action="Index">Back to List</a>
 </div>
 
