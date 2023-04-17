@@ -43,7 +43,7 @@ public class RepositorioUsuario
 		int res = 0;
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
-			var query = @"DELETE FROM usuarios WHERE idUsuario = @id;";
+			var query = @"DELETE FROM usuario WHERE idUsuario = @id;";
 
 			using (var command = new MySqlCommand(query, connection))
 			{
@@ -61,7 +61,7 @@ public class RepositorioUsuario
 		int res = 0;
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
-			String query = @"UPDATE usuarios
+			String query = @"UPDATE usuario
 			SET nombre = @nombre, apellido = @apellido, email = @email, rol = @rol
 			WHERE idUsuario = @id;";
 

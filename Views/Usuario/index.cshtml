@@ -55,10 +55,10 @@
 					@Html.DisplayFor(modelItem => item.RolNombre)
 				</td>
 				<td>
-					<a href='@Url.Action("Edit", new { id = item.idUsuario })' class="btn btn-sm btn-info">
+					<a href='@Url.Action("EditarUsuario", new { id = item.idUsuario })' class="btn btn-sm btn-info">
 						<i class="fa-solid fa-pencil"></i>
 					</a>
-					<a href='@Url.Action("Delete", new { id = item.idUsuario })' class="btn btn-sm btn-danger">
+					<a href='@Url.Action("BorrarUsuario", new { id = item.idUsuario })' class="btn btn-sm btn-danger">
 						<i class="fa-solid fa-trash"></i>
 					</a>
 				</td>

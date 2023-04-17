@@ -11,11 +11,13 @@ public class RepositorioCloud {
 
     private readonly BlobServiceClient blobServiceClient;
     private readonly string containerName;
+    private readonly string connectionString;
 
     public RepositorioCloud(string connectionString, string containerName)
     {
         blobServiceClient = new BlobServiceClient(connectionString);
         this.containerName = containerName;
+        this.connectionString = connectionString;
     }
 
     public async Task<string> SubirAvatarAsync(string fileName, IFormFile file)
@@ -35,10 +37,20 @@ public class RepositorioCloud {
     }
     public async Task BorrarAvatar(string fileName)
     {
-        var containerClient = blobServiceClient.GetBlobContainerClient(containerName);
-        var blobClient = containerClient.GetBlobClient(fileName);
+        try
+        {
+            var blobUri = new Uri(fileName);
+            var blobName = Path.GetFileName(blobUri.LocalPath);
 
-        await blobClient.DeleteAsync();
+            var containerClient = new BlobContainerClient(connectionString, containerName);
+            var blobClient = containerClient.GetBlobClient(blobName);
+
+            await blobClient.DeleteAsync();
+        }
+        catch (System.Exception)
+        {
+            throw;
+        }
     }
 
 

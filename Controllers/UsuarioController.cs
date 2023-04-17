@@ -195,7 +195,7 @@ namespace Inmobiliaria_DotNet.Controllers
 						// ModelState.AddModelError("ConfirmPassword", "Las contraseñas no coinciden");
 						// ViewBag.Error = "Las contraseñas no coinciden";
 						// ViewBag.Roles = Usuario.ObtenerRoles();
-          Console.WriteLine("Las contraseñas no coinciden");
+          	Console.WriteLine("Las contraseñas no coinciden");
 						return View(usuarioDB);
 					}
 
@@ -219,17 +219,9 @@ namespace Inmobiliaria_DotNet.Controllers
           Database db = repoDB.GetDatabase();
           // Instanciar objeto que contiene funciones de subida de foto de perfil
           var cloud = new RepositorioCloud(db.connection_string, db.container);
-
 					string fileName = $"avatar_{usuario.idUsuario + Path.GetExtension(usuario.AvatarFile.FileName)}";
           var imageUrl = await cloud.SubirAvatarAsync(fileName, usuario.AvatarFile);
-					Repo.ModificarAvatar(usuario);
-
-					string wwwPath = environment.WebRootPath;
-					string path = Path.Combine(wwwPath, "Uploads");
-					if (!Directory.Exists(path))
-					{
-						Directory.CreateDirectory(path);
-					}
+          usuario.avatar = imageUrl;
 					Repo.ModificarAvatar(usuario);
 				}
 
@@ -273,15 +265,15 @@ namespace Inmobiliaria_DotNet.Controllers
 		[Authorize(Policy = "Administrador")]
 		public ActionResult BorrarUsuario(int id)
 		{
-			var usuario = Repo.BuscarUsuarioPorId(id);
-			return View(usuario);
+			var usuarioBorrar = Repo.BuscarUsuarioPorId(id);
+			return View(usuarioBorrar);
 		}
 
 		// POST: Usuarios/Delete/5
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		[Authorize(Policy = "Administrador")]
-		public async Task<ActionResult> BorrarUsuarioAsync(int id, Usuario usuario)
+		public async Task<ActionResult> BorrarUsuario(int id, Usuario usuario)
 		{
 			try
 			{
@@ -299,8 +291,7 @@ namespace Inmobiliaria_DotNet.Controllers
 			}
 			catch
 			{
-				var user = Repo.BuscarUsuarioPorId(id);
-				return View(user);
+				throw;
 			}
 		}
 
