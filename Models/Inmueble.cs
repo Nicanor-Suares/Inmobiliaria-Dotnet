@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 public class Inmueble
 {
+	[Display(Name = "Código Inmueble")]
 	public int idInmueble { get; set; }
 	public bool Disponibilidad { get; set; }
 	public int Precio { get; set; }
 	public int PropietarioId { get; set; }
 	[ForeignKey(nameof(PropietarioId))]
+	[Display(Name = "Propietario del Inmueble")]
 	public Propietario PropietarioInmueble { get; set; }
 	public string Direccion { get; set; }
 	public int idTipo { get; set; }

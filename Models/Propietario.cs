@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Inmobiliaria_DotNet.Models;
 public class Propietario
 {
+	[Display(Name = "Código Propietario")]
 	public int idPropietario { get; set; }
 	public string ? Nombre { get; set; }
 	public string ? Apellido { get; set; }

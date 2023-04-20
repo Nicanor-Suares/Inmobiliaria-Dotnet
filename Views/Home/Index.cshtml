@@ -2,8 +2,6 @@
 	ViewData["Title"] = "Home Page";
 }
 
-<p>hola</p>
-
 @if (!User.Identity.IsAuthenticated)
 {
 	await Html.RenderPartialAsync("_Login", new LoginView());

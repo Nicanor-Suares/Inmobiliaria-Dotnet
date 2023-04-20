@@ -16,7 +16,7 @@ using System.ComponentModel.DataAnnotations;
 		public int InmuebleId { get; set; }
 		[ForeignKey(nameof(InmuebleId))]
 		public Inmueble InmuebleContrato { get; set; }
-		[Display(Name = "idInquilino")]
+		[Display(Name = "Código Inquilino")]
 		public int InquilinoId { get; set; }
 		[ForeignKey(nameof(InquilinoId))]
 		[Display(Name = "Inquilino")]

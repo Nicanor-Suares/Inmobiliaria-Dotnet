@@ -51,7 +51,7 @@
 					<option value="" disabled selected>Seleccione un tipo de inmueble</option>
 					@foreach (var item in listaTipos)
 					{
-						@:<option @(item.idTipo == Model.idTipo ? "selected" : "") value="@item.idTipo">@(item.tipo) </option>
+						@:<option @(item.idTipo == Model.TipoInmueble.idTipo ? "selected" : "") value="@item.idTipo">@(item.ToString()) </option>
 					}
 				</select>
 				<span asp-validation-for="PropietarioId" class="text-danger"></span>
