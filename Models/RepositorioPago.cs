@@ -193,4 +193,50 @@ public class RepositorioPago
 		}
 		return res;
 	}
+
+	public List<Pago> VerPagosContrato(int idContrato)
+	{
+		List<Pago> listaPagos = new List<Pago>();
+		using (MySqlConnection connection = new MySqlConnection(connectionString))
+		{
+			var query = @"SELECT idPago, p.idContrato, fechaPago, monto, nroPago, i.direccion, inq.nombre, inq.apellido
+			FROM pago p
+			INNER JOIN contrato c ON p.idContrato = c.idContrato
+			INNER JOIN inmueble i ON c.idInmueble = i.idInmueble
+			INNER JOIN inquilino inq ON c.idInquilino = inq.idInquilino
+			WHERE p.idContrato = @idContrato;";
+
+			using (var command = new MySqlCommand(query, connection))
+			{
+				connection.Open();
+				command.Parameters.AddWithValue("@idContrato", idContrato);
+				using (var reader = command.ExecuteReader())
+				{
+					while (reader.Read())
+					listaPagos.Add(new Pago
+					{
+						IdPago = Convert.ToInt32(reader["idPago"]),
+						IdContrato = Convert.ToInt32(reader["idContrato"]),
+						ContratoPago = new Contrato
+						{
+							InmuebleContrato = new Inmueble
+							{
+								Direccion = reader.GetString("direccion"),
+							},
+							InquilinoContrato = new Inquilino
+							{
+								Nombre = reader.GetString("nombre"),
+								Apellido = reader.GetString("apellido"),
+							}
+						},
+						FechaPago = Convert.ToDateTime(reader["fechaPago"]),
+						Monto = Convert.ToInt32(reader["monto"]),
+						nroPago = Convert.ToInt32(reader["nroPago"]),
+					});
+				}
+			}
+			connection.Close();
+		}
+		return listaPagos;
+	}
 }

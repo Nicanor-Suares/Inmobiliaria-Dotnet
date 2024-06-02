@@ -13,12 +13,14 @@ namespace Inmobiliaria_DotNet.Controllers
 		private readonly RepositorioInmueble Repo;
 		private readonly RepositorioPropietario repoPropietario;
 		private readonly RepositorioTipoInmueble repoTipoInmueble;
+		private readonly RepositorioContrato repoContratos;
 
 		public InmuebleController()
 		{
 			Repo = new RepositorioInmueble();
 			repoPropietario = new RepositorioPropietario();
 			repoTipoInmueble = new RepositorioTipoInmueble();
+			repoContratos = new RepositorioContrato();
 		}
 		// GET: Inmueble
 		public ActionResult Index()
@@ -33,7 +35,7 @@ namespace Inmobiliaria_DotNet.Controllers
 			var inmuDetalles = Repo.BuscarInmueble(id);
 			return View(inmuDetalles);
 		}
-		
+
 		// GET: Inmueble/Create
 		public ActionResult AltaInmueble()
 		{
@@ -122,6 +124,20 @@ namespace Inmobiliaria_DotNet.Controllers
 			{
 				throw;
 				//return View();
+			}
+		}
+
+		[HttpGet]
+		public ActionResult VerContratosInmueble(int id)
+		{
+			try
+			{
+				var contratos = repoContratos.VerContratosInmueble(id);
+				return View(contratos);
+			}
+			catch
+			{
+				return View();
 			}
 		}
 	}

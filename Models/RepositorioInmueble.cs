@@ -72,7 +72,7 @@ public class RepositorioInmueble
 				using (MySqlDataReader reader = command.ExecuteReader())
 				{
 					if (reader.Read())
-					{            
+					{
 						res = new Inmueble{
 							idInmueble = reader.GetInt32(nameof(Inmueble.idInmueble)),
 							PropietarioId = reader.GetInt32(nameof(Inmueble.PropietarioId)),
@@ -144,6 +144,44 @@ public class RepositorioInmueble
 								Nombre = reader.GetString("Nombre"),
 								Apellido = reader.GetString("Apellido"),
 							},
+							TipoInmueble = new TipoInmueble{
+								idTipo = reader.GetInt32(nameof(TipoInmueble.idTipo)),
+								tipo = reader.GetString(nameof(TipoInmueble.tipo))
+							}
+						};
+						listaInmuebles.Add(inmueble);
+					}
+				}
+			}
+			connection.Close();
+		}
+		return listaInmuebles;
+	}
+
+	public List<Inmueble> VerPropiedades(int idPropietario)
+	{
+		List<Inmueble> listaInmuebles = new List<Inmueble>();
+		using (MySqlConnection connection = new MySqlConnection(connectionString))
+		{
+			var query = @"SELECT idInmueble, i.direccion, precio, disponibilidad,
+			ti.idTipo, ti.tipo
+			FROM inmueble i	INNER JOIN tipo_inmueble ti ON i.idTipo = ti.idTipo
+			WHERE i.propietarioId = @idPropietario;";
+
+			using (MySqlCommand command = new MySqlCommand(query, connection))
+			{
+				command.Parameters.AddWithValue("@idPropietario", idPropietario);
+				connection.Open();
+				using (MySqlDataReader reader = command.ExecuteReader())
+				{
+					while (reader.Read())
+					{
+						Inmueble inmueble = new Inmueble
+						{
+							idInmueble = reader.GetInt32(nameof(Inmueble.idInmueble)),
+							Direccion = reader.GetString("Direccion"),
+							Precio = reader.GetInt32(nameof(Inmueble.Precio)),
+							Disponibilidad = reader.GetBoolean("Disponibilidad"),
 							TipoInmueble = new TipoInmueble{
 								idTipo = reader.GetInt32(nameof(TipoInmueble.idTipo)),
 								tipo = reader.GetString(nameof(TipoInmueble.tipo))

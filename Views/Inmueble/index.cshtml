@@ -55,6 +55,9 @@
 				@(item.TipoInmueble.tipo)
 			</td>
 			<td>
+				<a href='@Url.Action("VerContratosInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-success">
+					<i class="fa-solid fa-file-signature"></i>
+				</a>
 				<a href='@Url.Action("EditarInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-info">
 					<i class="fa fa-pencil"></i>
 				</a>

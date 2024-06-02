@@ -44,13 +44,11 @@ namespace Inmobiliaria_DotNet.Controllers
 		//[Authorize(Policy = "Administrador")]
 		public ActionResult AltaUsuario()
 		{
-			try
-			{
+			try	{
 			 	ViewBag.Roles = Usuario.ObtenerRoles();
-				return View(); 
+				return View();
 			}
-			catch (System.Exception)
-			{
+			catch (System.Exception) {
 				throw;
 			}
 		}
@@ -102,7 +100,7 @@ namespace Inmobiliaria_DotNet.Controllers
 
 				int res = Repo.AltaUsuario(usuario);
 				Repo.ModificarContraseña(usuario);
-				
+
 				if (usuario.AvatarFile != null && usuario.idUsuario > 0)
 				{
 					Database db = repoDB.GetDatabase();
@@ -275,12 +273,11 @@ namespace Inmobiliaria_DotNet.Controllers
 		[Authorize(Policy = "Administrador")]
 		public async Task<ActionResult> BorrarUsuario(int id, Usuario usuario)
 		{
-			try
-			{
+			try {
 				var user = Repo.BuscarUsuarioPorId(id);
-				
+
 				// Borrar la foto si existe
-				if (user.avatar != null){          
+				if (user.avatar != null){
 					Database db = repoDB.GetDatabase();
 					var cloud = new RepositorioCloud(db.connection_string, db.container);
 					await cloud.BorrarAvatar(user.avatar);
@@ -289,8 +286,7 @@ namespace Inmobiliaria_DotNet.Controllers
 				Repo.Eliminar(id);
 				return RedirectToAction(nameof(Index));
 			}
-			catch
-			{
+			catch {
 				throw;
 			}
 		}
@@ -316,8 +312,7 @@ namespace Inmobiliaria_DotNet.Controllers
 		[ValidateAntiForgeryToken]
 		public async Task<ActionResult> Login(LoginView login)
 		{
-			try
-			{
+			try {
 				var returnUrl = String.IsNullOrEmpty(TempData["returnUrl"] as string) ? "/Home" : TempData["returnUrl"]?.ToString();
 				if (ModelState.IsValid)
 				{
@@ -363,8 +358,7 @@ namespace Inmobiliaria_DotNet.Controllers
 				TempData["returnUrl"] = returnUrl;
 				return View();
 			}
-			catch
-			{
+			catch {
 				throw;
 			}
 		}

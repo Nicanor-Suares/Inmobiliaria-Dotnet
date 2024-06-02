@@ -1,12 +1,12 @@
 namespace Inmobiliaria_DotNet.Models;
 
 public class Database {
-	
+
 	public int id {get; set;}
 	public string container {get; set;}
 	public string access_key {get; set;}
 	public string connection_string {get; set;}
-	
+
 	public Database(){
 		this.id = 0;
 		this.container = "";

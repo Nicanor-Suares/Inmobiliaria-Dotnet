@@ -113,7 +113,7 @@ public class RepositorioInquilino
 				connection.Open();
 				using (MySqlDataReader reader = command.ExecuteReader())
 				{
-					while (reader.Read()){            
+					while (reader.Read()){
 						Inquilino inquilino = new Inquilino
 						{
 							idInquilino = reader.GetInt32(nameof(Inquilino.idInquilino)),

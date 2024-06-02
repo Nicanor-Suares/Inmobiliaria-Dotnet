@@ -1,0 +1,51 @@
+@model IEnumerable<Inmobiliaria_DotNet.Models.Inmueble>
+
+@{
+	ViewData["Title"] = "Lista de Propiedades";
+}
+
+<h1>Lista de Propiedades del Propietario</h1>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.idInmueble)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Direccion)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Precio)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Disponibilidad)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TipoInmueble.tipo)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.idInmueble)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Direccion)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Precio)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Disponibilidad)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.TipoInmueble.tipo)
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

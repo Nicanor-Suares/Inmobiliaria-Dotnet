@@ -1,19 +1,10 @@
 @model IEnumerable<Inmobiliaria_DotNet.Models.Contrato>
 
 @{
-	ViewData["Title"] = "Listar Contratos";
+	ViewData["Title"] = "Contratos del Inmueble";
 }
 
-<h1>Lista de Contratos</h1>
-
-<div class="d-flex align-items-center">
-	<p class="me-2">
-		<a asp-action="VerVigentes" class="btn btn-primary">Ver Contratos Vigentes</a>
-	</p>
-	<p>
-		<a asp-action="AltaContrato" class="btn btn-primary">Agregar Contrato</a>
-	</p>
-</div>
+<h1>Lista de Contratos del Inmueble</h1>
 
 <table class="table">
 	<thead>
@@ -65,23 +56,6 @@
 			</td>
 			<td>
 				@Html.DisplayFor(modelItem => item.Activo)
-			</td>
-			<td>
-				<a href='@Url.Action("VerPagosContrato", new { id = item.idContrato })' class="btn btn-sm btn-success">
-					<i class="fa-solid fa-dollar-sign"></i>
-				</a>
-				<a href='@Url.Action("EditarContrato", new { id = item.idContrato })' class="btn btn-sm btn-info">
-					<i class="fa fa-pencil"></i>
-				</a>
-				<a href='@Url.Action("DetallesContrato", new { id = item.idContrato })' class="btn btn-sm btn-warning">
-					<i class="fa fa-circle-info"></i>
-				</a>
-				@if (User.IsInRole("Administrador"))
-				{
-					<a href='@Url.Action("BorrarContrato", new { id = item.idContrato })' class="btn btn-sm btn-danger">
-						<i class="fa-solid fa-trash"></i>
-					</a>
-				}
 			</td>
 		</tr>
 }

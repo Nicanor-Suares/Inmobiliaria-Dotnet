@@ -13,7 +13,7 @@ namespace Inmobiliaria_DotNet.Controllers
 		private readonly RepositorioPago Repo;
 		private readonly RepositorioInmueble repoInmueble;
 		private readonly RepositorioContrato repoContrato;
-		
+
 		public PagoController()
 		{
 			Repo = new RepositorioPago();
@@ -49,7 +49,6 @@ namespace Inmobiliaria_DotNet.Controllers
 		{
 			try
 			{
-				// TODO: Add insert logic here
 				Repo.AltaPago(pago);
 				return RedirectToAction(nameof(Index));
 			}

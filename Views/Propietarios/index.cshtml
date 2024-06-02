@@ -34,41 +34,44 @@
 		</tr>
 	</thead>
 	<tbody>
-@foreach (var item in Model) {
-		<tr>
-			<td>
-				@Html.DisplayFor(modelItem => item.idPropietario)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Nombre)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Apellido)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Dni)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Direccion)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.Telefono)
-			</td>
-			<td>
-				<a href='@Url.Action("EditarPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-info">
-					<i class="fa fa-pencil"></i>
-				</a>
-				<a href='@Url.Action("DetallesPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-warning">
-					<i class="fa fa-circle-info"></i>
-				</a>
-				@if (User.IsInRole("Administrador"))
-				{
-					<a href='@Url.Action("BorrarPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-danger">
-						<i class="fa-solid fa-trash"></i>
+		@foreach (var item in Model) {
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.idPropietario)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Nombre)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Apellido)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Dni)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Direccion)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Telefono)
+				</td>
+				<td>
+					<a href='@Url.Action("VerPropiedades", new { id = item.idPropietario })' class="btn btn-sm btn-success">
+						<i class="fa-solid fa-house"></i>
 					</a>
-				}
-			</td>
-		</tr>
-}
+					<a href='@Url.Action("EditarPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-info">
+						<i class="fa fa-pencil"></i>
+					</a>
+					<a href='@Url.Action("DetallesPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-warning">
+						<i class="fa fa-circle-info"></i>
+					</a>
+					@if (User.IsInRole("Administrador"))
+					{
+						<a href='@Url.Action("BorrarPropietario", new { id = item.idPropietario })' class="btn btn-sm btn-danger">
+							<i class="fa-solid fa-trash"></i>
+						</a>
+					}
+				</td>
+			</tr>
+		}
 	</tbody>
 </table>

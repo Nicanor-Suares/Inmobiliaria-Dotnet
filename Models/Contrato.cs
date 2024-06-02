@@ -58,10 +58,9 @@ using System.ComponentModel.DataAnnotations;
 			Activo = activo;
 		}
 
-	public override string ToString()
-	{
+		public override string ToString()
+		{
 			return $"Código: {idContrato} Inmueble: {InmuebleContrato.Direccion} Inquilino: {InquilinoContrato.Nombre} {InquilinoContrato.Apellido}";
-	}
+		}
 
 	}
-		

@@ -1,0 +1,55 @@
+@model IEnumerable<Inmobiliaria_DotNet.Models.Pago>
+
+@{
+		ViewData["Title"] = "Listar Pagos";
+}
+
+<h1>Lista de Pagos del Contrato</h1>
+
+<p>
+  <a asp-controller="Pago" asp-action="AltaPago" asp-route-idContrato="@Model.FirstOrDefault()?.IdContrato" class="btn btn-primary">Agregar Pago</a>
+</p>
+
+<table class="table">
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(model => model.IdPago)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.IdContrato)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.FechaPago)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Monto)
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.nroPago)
+				</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+      @foreach (var item in Model) {
+        <tr>
+          <td>
+            @Html.DisplayFor(modelItem => item.IdPago)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => item.IdContrato)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => item.FechaPago)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => item.Monto)
+          </td>
+          <td>
+            @Html.DisplayFor(modelItem => item.nroPago)
+          </td>
+        </tr>
+      }
+		</tbody>
+</table>

@@ -43,7 +43,6 @@ namespace Inmobiliaria_DotNet.Controllers
 		{
 			try
 			{
-				// TODO: Add insert logic here
 				Repo.AltaInquilino(inquilino);
 				return RedirectToAction(nameof(Index));
 			}
@@ -67,7 +66,6 @@ namespace Inmobiliaria_DotNet.Controllers
 		{
 			try
 			{
-				// TODO: Add update logic here
 				inquilino.idInquilino = id;
 				Repo.EditarInquilino(inquilino);
 				return RedirectToAction(nameof(Index));
@@ -92,7 +90,6 @@ namespace Inmobiliaria_DotNet.Controllers
 		{
 			try
 			{
-				// TODO: Add delete logic here
 				Repo.BorrarInquilino(id);
 				return RedirectToAction(nameof(Index));
 			}

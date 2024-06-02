@@ -127,7 +127,7 @@ namespace Inmobiliaria_DotNet.Models;
 					Direccion = reader.GetString(nameof(propietario.Direccion)),
 					Telefono = reader.GetString(nameof(propietario.Telefono))
 				};
-				listaPropietarios.Add(propietario);  
+				listaPropietarios.Add(propietario);
 			}
 			}
 		}

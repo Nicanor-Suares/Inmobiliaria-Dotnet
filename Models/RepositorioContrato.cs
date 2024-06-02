@@ -111,15 +111,118 @@ namespace Inmobiliaria_DotNet.Models;
 			List<Contrato> listaContratos = new List<Contrato>();
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"SELECT idContrato, fechaInicio, fechaFin, 
-				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp 
-				FROM contrato c 
+				var query = @"SELECT idContrato, fechaInicio, fechaFin,
+				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp
+				FROM contrato c
 				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
 				INNER JOIN inmueble inmu ON c.idInmueble = inmu.idInmueble
 				INNER JOIN propietario p on inmu.propietarioId = p.idPropietario
 				";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
+					connection.Open();
+					using (var reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Contrato contrato = new Contrato
+							{
+								idContrato = reader.GetInt32(nameof(contrato.idContrato)),
+								FechaInicio = reader.GetDateTime(nameof(contrato.FechaInicio)),
+								FechaFin = reader.GetDateTime(nameof(contrato.FechaFin)),
+								InquilinoId = reader.GetInt32("idInquilino"),
+								InmuebleId = reader.GetInt32("idInmueble"),
+								Activo = reader.GetBoolean(nameof(contrato.Activo)),
+								InquilinoContrato = new Inquilino
+								{
+									Nombre = reader.GetString(nameof(contrato.InquilinoContrato.Nombre)),
+									Apellido = reader.GetString(nameof(contrato.InquilinoContrato.Apellido))
+								},
+								InmuebleContrato = new Inmueble
+								{
+									Direccion = reader.GetString(nameof(contrato.InmuebleContrato.Direccion)),
+									PropietarioInmueble = new Propietario {
+										Nombre = reader.GetString("nombreProp"),
+										Apellido = reader.GetString("apellidoProp")
+									}
+								}
+							};
+							listaContratos.Add(contrato);
+						}
+					connection.Close();
+					}
+				}
+			}
+			return listaContratos;
+		}
+
+		public List<Contrato> ListarContratosVigentes()
+		{
+			List<Contrato> listaContratos = new List<Contrato>();
+			using (MySqlConnection connection = new MySqlConnection(connectionString))
+			{
+				var query = @"SELECT idContrato, fechaInicio, fechaFin,
+				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp
+				FROM contrato c
+				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
+				INNER JOIN inmueble inmu ON c.idInmueble = inmu.idInmueble
+				INNER JOIN propietario p on inmu.propietarioId = p.idPropietario
+				WHERE c.activo = 1
+				";
+				using (MySqlCommand command = new MySqlCommand(query, connection))
+				{
+					connection.Open();
+					using (var reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Contrato contrato = new Contrato
+							{
+								idContrato = reader.GetInt32(nameof(contrato.idContrato)),
+								FechaInicio = reader.GetDateTime(nameof(contrato.FechaInicio)),
+								FechaFin = reader.GetDateTime(nameof(contrato.FechaFin)),
+								InquilinoId = reader.GetInt32("idInquilino"),
+								InmuebleId = reader.GetInt32("idInmueble"),
+								Activo = reader.GetBoolean(nameof(contrato.Activo)),
+								InquilinoContrato = new Inquilino
+								{
+									Nombre = reader.GetString(nameof(contrato.InquilinoContrato.Nombre)),
+									Apellido = reader.GetString(nameof(contrato.InquilinoContrato.Apellido))
+								},
+								InmuebleContrato = new Inmueble
+								{
+									Direccion = reader.GetString(nameof(contrato.InmuebleContrato.Direccion)),
+									PropietarioInmueble = new Propietario {
+										Nombre = reader.GetString("nombreProp"),
+										Apellido = reader.GetString("apellidoProp")
+									}
+								}
+							};
+							listaContratos.Add(contrato);
+						}
+					connection.Close();
+					}
+				}
+			}
+			return listaContratos;
+		}
+
+		public List<Contrato> VerContratosInmueble(int idInmueble)
+		{
+			List<Contrato> listaContratos = new List<Contrato>();
+			using (MySqlConnection connection = new MySqlConnection(connectionString))
+			{
+				var query = @"SELECT idContrato, fechaInicio, fechaFin,
+				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp
+				FROM contrato c
+				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
+				INNER JOIN inmueble inmu ON c.idInmueble = inmu.idInmueble
+				INNER JOIN propietario p on inmu.propietarioId = p.idPropietario
+				WHERE c.idInmueble = @idInmueble
+				";
+				using (MySqlCommand command = new MySqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@idInmueble", idInmueble);
 					connection.Open();
 					using (var reader = command.ExecuteReader())
 					{

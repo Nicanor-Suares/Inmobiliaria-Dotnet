@@ -1,10 +1,7 @@
 namespace Inmobiliaria_DotNet.Models;
-using System;
-using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 public class Inmueble
 {
@@ -64,9 +61,8 @@ public class Inmueble
 		this.TipoInmueble = TipoInmueble;
 	}
 
-	public override string ToString()
-	{
-			return $"{Direccion}";
+	public override string ToString() {
+		return $"{Direccion}";
 	}
 
 }
