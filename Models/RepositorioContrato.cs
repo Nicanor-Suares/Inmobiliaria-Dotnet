@@ -10,6 +10,26 @@ namespace Inmobiliaria_DotNet.Models;
 			int res = 0;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
+				// Query para chequear superpuestos
+        var overlapQuery = @"SELECT COUNT(*) FROM contrato
+                             WHERE idInmueble = @InmuebleId
+                             AND activo = 1
+                             AND (fechaInicio < @FechaFin AND fechaFin > @FechaInicio)";
+        using (MySqlCommand overlapCommand = new MySqlCommand(overlapQuery, connection))
+        {
+					overlapCommand.Parameters.AddWithValue("@FechaInicio", contrato.FechaInicio);
+					overlapCommand.Parameters.AddWithValue("@FechaFin", contrato.FechaFin);
+					overlapCommand.Parameters.AddWithValue("@InmuebleId", contrato.InmuebleId);
+					connection.Open();
+					int overlapCount = Convert.ToInt32(overlapCommand.ExecuteScalar());
+					connection.Close();
+
+					if (overlapCount > 0)
+					{
+						return 0;
+					}
+        }
+
 				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, monto, idInquilino, idInmueble, activo)
 				VALUES (@FechaInicio, @FechaFin, @Monto, @InquilinoId, @InmuebleId, @Activo);
 				SELECT LAST_INSERT_ID();";

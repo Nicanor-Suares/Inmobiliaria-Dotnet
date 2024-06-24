@@ -66,7 +66,15 @@ namespace Inmobiliaria_DotNet.Controllers
 		{
 			try
 			{
-				Repo.AltaContrato(contrato);
+				var result = Repo.AltaContrato(contrato);
+				if (result == 0)
+				{
+						// If there is an overlap, add a model state error
+						ModelState.AddModelError("", "Hay un contrato existente que se superpone en las fechas seleccionadas para esta propiedad.");
+						ViewBag.Inquilino = repoInquilino.ListarInquilinos();
+						ViewBag.Inmueble = repoInmueble.ListarInmuebles();
+						return View(contrato);
+				}
 				return RedirectToAction(nameof(Index));
 			}
 			catch
@@ -74,7 +82,6 @@ namespace Inmobiliaria_DotNet.Controllers
 				ViewBag.Inquilino = repoInquilino.ListarInquilinos();
 				ViewBag.Inmueble = repoInmueble.ListarInmuebles();
 				throw;
-				//return View();
 			}
 		}
 
