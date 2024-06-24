@@ -7,7 +7,8 @@
 	await Html.RenderPartialAsync("_Login", new LoginView());
 	<a href="@Url.RouteUrl("login")">Ir al login</a>
 }
-
+else
+{
 <div class="jumbotron jumbotron-fluid text-light bg-dark">
     <div class="container text-center">
         <h1 class="display-4">Welcome to NestQuest</h1>
@@ -83,7 +84,7 @@
         }
     </div>
 </div>
-
+}
 
 @section Scripts {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
