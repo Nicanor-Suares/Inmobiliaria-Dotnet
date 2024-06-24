@@ -8,10 +8,15 @@ using System.ComponentModel.DataAnnotations;
 	{
 		[Display(Name = "Código Contrato")]
 		public int idContrato { get; set; }
+
 		[Display(Name = "Fecha de Inicio")]
 		public DateTime FechaInicio { get; set; }
+
 		[Display(Name = "Fecha de Finalización")]
 		public DateTime FechaFin { get; set; }
+
+		[Display(Name = "Monto")]
+		public int Monto { get; set; }
 		[Display(Name = "Código Inmueble")]
 		public int InmuebleId { get; set; }
 		[ForeignKey(nameof(InmuebleId))]
@@ -27,15 +32,17 @@ using System.ComponentModel.DataAnnotations;
 			this.idContrato = 0;
 			FechaInicio = DateTime.Now;
 			FechaFin = DateTime.Now;
+			Activo = true;
+			Monto = 0;
 			InmuebleId = 0;
 			InquilinoId = 0;
-			Activo = true;
 		}
 		public Contrato(int idContrato)
 		{
 			this.idContrato = idContrato;
 			this.FechaInicio = DateTime.Now;
 			this.FechaFin = DateTime.Now;
+			this.Monto = 0;
 			this.InmuebleId = 0;
 			this.InquilinoId = 0;
 			this.Activo = true;
@@ -45,6 +52,7 @@ using System.ComponentModel.DataAnnotations;
 			this.idContrato = idContrato;
 			FechaInicio = fechaInicio;
 			FechaFin = fechaFin;
+			Monto = 0;
 			InmuebleId = InmuebleId;
 			InquilinoId = InquilinoId;
 			Activo = activo;
@@ -53,6 +61,7 @@ using System.ComponentModel.DataAnnotations;
 		{
 			FechaInicio = fechaInicio;
 			FechaFin = fechaFin;
+			Monto = 0;
 			InmuebleId = InmuebleId;
 			InquilinoId = InquilinoId;
 			Activo = activo;

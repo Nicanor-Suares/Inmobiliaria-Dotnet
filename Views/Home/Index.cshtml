@@ -7,3 +7,86 @@
 	await Html.RenderPartialAsync("_Login", new LoginView());
 	<a href="@Url.RouteUrl("login")">Ir al login</a>
 }
+
+<div class="jumbotron jumbotron-fluid text-light bg-dark">
+    <div class="container text-center">
+        <h1 class="display-4">Welcome to NestQuest</h1>
+        <p class="lead">Su solución integral para gestionar propiedades, inquilinos, contratos y pagos fácilmente</p>
+        <a class="btn btn-primary btn-lg" asp-controller="Inmueble" asp-action="Index" role="button">Ver Inmuebles</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-user fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Gestionar propietarios</h5>
+                    <p class="card-text">Mantenga un registro de los propietarios y sus detalles.</p>
+                    <a href="@Url.Action("Index", "Propietarios")" class="btn btn-primary">Ir a propietarios</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-user fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Gestionar inquilinos</h5>
+                    <p class="card-text">Administre fácilmente la información del inquilino y los detalles del alquiler.</p>
+                    <a href="@Url.Action("Index", "Inquilino")" class="btn btn-primary">Ir a inquilinos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-building fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Administrar inmuebles</h5>
+                    <p class="card-text">Vea y administre todas las propiedades en un solo lugar.</p>
+                    <a href="@Url.Action("Index", "Inmueble")" class="btn btn-primary">Ir a inmuebles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-file-signature fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Administrar contratos</h5>
+                    <p class="card-text">Gestione contratos y acuerdos de alquiler sin esfuerzo.</p>
+                    <a href="@Url.Action("Index", "Contrato")" class="btn btn-primary">Ir a contratos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <i class="fa-solid fa-money-bill fa-3x mb-3 text-primary"></i>
+                    <h5 class="card-title">Administrar pagos</h5>
+                    <p class="card-text">Realice un seguimiento y administre los pagos de alquiler con facilidad.</p>
+                    <a href="@Url.Action("Index", "Pago")" class="btn btn-primary">Ir a pagos</a>
+                </div>
+            </div>
+        </div>
+        @if (User.IsInRole("Administrador"))
+        {
+            <div class="col-md-4 text-center mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fa-solid fa-users fa-3x mb-3 text-primary"></i>
+                        <h5 class="card-title">Administrar usuarios</h5>
+                        <p class="card-text">Gestione usuarios y roles.</p>
+                        <a href="@Url.Action("Index", "Usuario")" class="btn btn-primary">Ir a usuarios</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+}

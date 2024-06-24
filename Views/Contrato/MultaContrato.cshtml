@@ -1,0 +1,38 @@
+@{
+  ViewData["Title"] = "Multa de Contrato";
+  var multa = @ViewBag.Multa;
+}
+
+<a asp-action="Index" class="btn btn-sm btn-light">
+    <i class="fa-solid fa-chevron-left"></i> Volver a la lista
+</a>
+
+<h1>Multa del Contrato</h1>
+
+<h4>El contrato ha sido rescindido.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label class="control-label">El valor de la multa es:</label>
+            <input type="text" class="form-control" value="@multa" readonly />
+        </div>
+
+        <p>Número de pagos realizados: @ViewBag.PagosRealizados</p>
+        <p>Número de pagos esperados: @ViewBag.PagosEsperados</p>
+
+        @if (ViewBag.PagosPendientes)
+        {
+            <p>¡El inquilino tiene pagos pendientes!</p>
+            <p>Número de pagos faltantes: @(ViewBag.PagosEsperados - ViewBag.PagosRealizados)</p>
+        }
+        else
+        {
+            <p>No se encontraron pagos pendientes.</p>
+        }
+
+        <div class="form-group mt-3">
+            <a asp-action="Index" class="btn btn-primary">Volver a la lista de contratos</a>
+        </div>
+    </div>
+</div>

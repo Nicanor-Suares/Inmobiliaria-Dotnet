@@ -67,10 +67,16 @@
 				@Html.DisplayFor(modelItem => item.Activo)
 			</td>
 			<td>
+				<a href='@Url.Action("RenovarContrato", new { id = item.idContrato })' class="btn btn-sm btn-info">
+					<i class="fa fa-recycle"></i>
+				</a>
+				<a href='@Url.Action("RescindirContrato", new { id = item.idContrato })' class="btn btn-sm btn-danger">
+					<i class="fa-solid fa-ban"></i>
+				</a>
 				<a href='@Url.Action("VerPagosContrato", new { id = item.idContrato })' class="btn btn-sm btn-success">
 					<i class="fa-solid fa-dollar-sign"></i>
 				</a>
-				<a href='@Url.Action("EditarContrato", new { id = item.idContrato })' class="btn btn-sm btn-info">
+				<a href='@Url.Action("EditarContrato", new { id = item.idContrato })' class="btn btn-sm btn-primary">
 					<i class="fa fa-pencil"></i>
 				</a>
 				<a href='@Url.Action("DetallesContrato", new { id = item.idContrato })' class="btn btn-sm btn-warning">

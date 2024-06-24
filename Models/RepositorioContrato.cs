@@ -10,13 +10,14 @@ namespace Inmobiliaria_DotNet.Models;
 			int res = 0;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, idInquilino, idInmueble, activo)
-				VALUES (@FechaInicio, @FechaFin, @InquilinoId, @InmuebleId, @Activo);
+				var query = @"INSERT INTO contrato (fechaInicio, fechaFin, monto, idInquilino, idInmueble, activo)
+				VALUES (@FechaInicio, @FechaFin, @Monto, @InquilinoId, @InmuebleId, @Activo);
 				SELECT LAST_INSERT_ID();";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@FechaInicio", contrato.FechaInicio);
 					command.Parameters.AddWithValue("@FechaFin", contrato.FechaFin);
+					command.Parameters.AddWithValue("@Monto", contrato.Monto);
 					command.Parameters.AddWithValue("@InquilinoId", contrato.InquilinoId);
 					command.Parameters.AddWithValue("@InmuebleId", contrato.InmuebleId);
 					command.Parameters.AddWithValue("@Activo", contrato.Activo);
@@ -35,15 +36,13 @@ namespace Inmobiliaria_DotNet.Models;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
 				//FIX
-				var query = @"UPDATE contrato SET fechaInicio = @FechaInicio, fechaFin = @FechaFin, 
-				idInquilino = @idInquilino, idInmueble = @idInmueble, 
-				activo = @Activo WHERE idContrato = @idContrato";
+				var query = @"UPDATE contrato SET fechaInicio = @FechaInicio, fechaFin = @FechaFin,
+				monto = @Monto, activo = @Activo WHERE idContrato = @idContrato";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
 					command.Parameters.AddWithValue("@fechaInicio", contrato.FechaInicio);
 					command.Parameters.AddWithValue("@fechaFin", contrato.FechaFin);
-					command.Parameters.AddWithValue("@idInquilino", contrato.InquilinoId);
-					command.Parameters.AddWithValue("@idInmueble", contrato.InmuebleId);
+					command.Parameters.AddWithValue("@monto", contrato.Monto);
 					command.Parameters.AddWithValue("@activo", contrato.Activo);
 					command.Parameters.AddWithValue("@idContrato", contrato.idContrato);
 					connection.Open();
@@ -60,8 +59,8 @@ namespace Inmobiliaria_DotNet.Models;
 			Contrato res = null;
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"SELECT idContrato, fechaInicio, fechaFin, 
-				idInquilino, idInmueble, activo FROM contrato 
+				var query = @"SELECT idContrato, fechaInicio, fechaFin, monto,
+				idInquilino, idInmueble, activo FROM contrato
 				WHERE idContrato = @idContrato";
 				using (MySqlCommand command = new MySqlCommand(query, connection))
 				{
@@ -76,6 +75,7 @@ namespace Inmobiliaria_DotNet.Models;
 								idContrato = reader.GetInt32(nameof(Contrato.idContrato)),
 								FechaInicio = reader.GetDateTime(nameof(Contrato.FechaInicio)),
 								FechaFin = reader.GetDateTime(nameof(Contrato.FechaFin)),
+								Monto = reader.GetInt32(nameof(Contrato.Monto)),
 								InquilinoId = reader.GetInt32("idInquilino"),
 								InmuebleId = reader.GetInt32("idInmueble"),
 								Activo = reader.GetBoolean(nameof(Contrato.Activo))
@@ -111,7 +111,7 @@ namespace Inmobiliaria_DotNet.Models;
 			List<Contrato> listaContratos = new List<Contrato>();
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"SELECT idContrato, fechaInicio, fechaFin,
+				var query = @"SELECT idContrato, fechaInicio, fechaFin, monto,
 				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp
 				FROM contrato c
 				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
@@ -130,6 +130,7 @@ namespace Inmobiliaria_DotNet.Models;
 								idContrato = reader.GetInt32(nameof(contrato.idContrato)),
 								FechaInicio = reader.GetDateTime(nameof(contrato.FechaInicio)),
 								FechaFin = reader.GetDateTime(nameof(contrato.FechaFin)),
+								Monto = reader.GetInt32(nameof(contrato.Monto)),
 								InquilinoId = reader.GetInt32("idInquilino"),
 								InmuebleId = reader.GetInt32("idInmueble"),
 								Activo = reader.GetBoolean(nameof(contrato.Activo)),
@@ -161,7 +162,7 @@ namespace Inmobiliaria_DotNet.Models;
 			List<Contrato> listaContratos = new List<Contrato>();
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"SELECT idContrato, fechaInicio, fechaFin,
+				var query = @"SELECT idContrato, fechaInicio, fechaFin, monto,
 				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp
 				FROM contrato c
 				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
@@ -181,6 +182,7 @@ namespace Inmobiliaria_DotNet.Models;
 								idContrato = reader.GetInt32(nameof(contrato.idContrato)),
 								FechaInicio = reader.GetDateTime(nameof(contrato.FechaInicio)),
 								FechaFin = reader.GetDateTime(nameof(contrato.FechaFin)),
+								Monto = reader.GetInt32(nameof(contrato.Monto)),
 								InquilinoId = reader.GetInt32("idInquilino"),
 								InmuebleId = reader.GetInt32("idInmueble"),
 								Activo = reader.GetBoolean(nameof(contrato.Activo)),
@@ -212,7 +214,7 @@ namespace Inmobiliaria_DotNet.Models;
 			List<Contrato> listaContratos = new List<Contrato>();
 			using (MySqlConnection connection = new MySqlConnection(connectionString))
 			{
-				var query = @"SELECT idContrato, fechaInicio, fechaFin,
+				var query = @"SELECT idContrato, fechaInicio, fechaFin, monto,
 				c.idInquilino, c.idInmueble, i.Nombre, i.apellido, inmu.propietarioId, inmu.direccion, activo, p.Nombre AS nombreProp, p.Apellido AS apellidoProp
 				FROM contrato c
 				INNER JOIN inquilino i ON c.idInquilino = i.idInquilino
@@ -233,6 +235,7 @@ namespace Inmobiliaria_DotNet.Models;
 								idContrato = reader.GetInt32(nameof(contrato.idContrato)),
 								FechaInicio = reader.GetDateTime(nameof(contrato.FechaInicio)),
 								FechaFin = reader.GetDateTime(nameof(contrato.FechaFin)),
+								Monto = reader.GetInt32(nameof(contrato.Monto)),
 								InquilinoId = reader.GetInt32("idInquilino"),
 								InmuebleId = reader.GetInt32("idInmueble"),
 								Activo = reader.GetBoolean(nameof(contrato.Activo)),
@@ -257,6 +260,52 @@ namespace Inmobiliaria_DotNet.Models;
 				}
 			}
 			return listaContratos;
+		}
+
+		public ControlContrato RescindirContrato(Contrato contrato, List<Pago> pagos)
+		{
+    	// Calcular si ha pasado más de la mitad de la duración del contrato
+			TimeSpan duracionContrato = contrato.FechaFin - contrato.FechaInicio;
+    	TimeSpan mitadDuracion = TimeSpan.FromTicks(duracionContrato.Ticks / 2);
+    	bool masDeLaMitad = DateTime.Now - contrato.FechaInicio > mitadDuracion;
+
+    	// Calcular la multa
+			int multa = 0;
+			if(masDeLaMitad) {
+				multa = contrato.Monto;
+			} else {
+				multa = contrato.Monto * 2;
+			}
+
+			int mesesContrato = (int)Math.Ceiling(duracionContrato.TotalDays / 30.436875); // Cantidad de meses aproximados en el contrato
+			int pagosEsperados = mesesContrato;
+
+			// Obtener cantidad de pagos hasta la fecha
+			int pagosRealizados = pagos.Count;
+
+			// Chequear si faltan pagos
+			bool pagosPendientes = pagosRealizados < pagosEsperados;
+
+			contrato.FechaFin = DateTime.Now;
+			contrato.Activo = false;
+
+			using (MySqlConnection connection = new MySqlConnection(connectionString))
+			{
+				//FIX
+				var query = @"UPDATE contrato SET fechaFin = @FechaFin,
+										activo = @Activo WHERE idContrato = @idContrato";
+				using (MySqlCommand command = new MySqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@fechaFin", contrato.FechaFin);
+					command.Parameters.AddWithValue("@activo", contrato.Activo);
+					command.Parameters.AddWithValue("@idContrato", contrato.idContrato);
+					connection.Open();
+					command.ExecuteNonQuery();
+					connection.Close();
+				}
+				connection.Close();
+			}
+			return new ControlContrato(multa, pagosRealizados, pagosEsperados, pagosPendientes);
 		}
 
 	}

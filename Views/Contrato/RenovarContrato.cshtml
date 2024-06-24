@@ -10,20 +10,22 @@
 	<i class="fa-solid fa-chevron-left"></i> Volver a la lista
 </a>
 
-<h1>Editar Contrato</h1>
+<h1>Renovar Contrato</h1>
 
 <h4>Contrato</h4>
 <hr />
 <div class="row">
 	<div class="col-md-4">
-		<form asp-action="EditarContrato">
+		<form asp-action="AltaContrato">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			@Html.HiddenFor(model => model.idContrato)
+      <span class="text-muted">(La fecha del final del contrato se ha seteado como la fecha de inicio automáticamente)</span>
 			<div class="form-group">
 				<label asp-for="FechaInicio" class="control-label"></label>
 				<input asp-for="FechaInicio" class="form-control" />
 				<span asp-validation-for="FechaInicio" class="text-danger"></span>
 			</div>
+      <span class="text-muted mt-3">(Se ha agregado dos años a la fecha final anterior automáticamente)</span>
 			<div class="form-group">
 				<label asp-for="FechaFin" class="control-label"></label>
 				<input asp-for="FechaFin" class="form-control" />
@@ -36,8 +38,8 @@
 			</div>
 			<div class="form-group">
 				<label asp-for="InmuebleId" class="control-label">Inmueble</label>
-				<select disabled class="form-control" name="InmuebleId">
-					<option value="" disabled selected></option>
+				<select class="form-control" name="InmuebleId">
+					<option value="" disabled selected>Seleccione un inmueble</option>
 					@foreach (var item in listaInmuebles)
 					{
 						@:<option @(item.idInmueble == Model.InmuebleId ? "selected" : "") value="@item.idInmueble">@(item.ToString()) </option>
@@ -46,8 +48,8 @@
 			</div>
 			<div class="form-group">
 				<label asp-for="InquilinoId" class="control-label">Inquilino</label>
-				<select disabled class="form-control" name="InquilinoId">
-					<option value="" disabled selected></option>
+				<select class="form-control" name="InquilinoId">
+					<option value="" disabled selected>Seleccione un inquilino</option>
 					@foreach (var item in listaInquilinos)
 					{
 						@:<option @(item.idInquilino == Model.InquilinoId ? "selected" : "") value="@item.idInquilino">@(item.ToString()) </option>

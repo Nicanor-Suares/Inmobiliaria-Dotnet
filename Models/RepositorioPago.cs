@@ -80,7 +80,7 @@ public class RepositorioPago
 		List<Pago> listaPagos = new List<Pago>();
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
-			var query = @"SELECT idPago, p.idContrato, fechaPago, monto, nroPago, i.direccion, inq.nombre, inq.apellido
+			var query = @"SELECT idPago, p.idContrato, fechaPago, p.monto AS montoPago, nroPago, i.direccion, inq.nombre, inq.apellido
 			FROM pago p
 			INNER JOIN contrato c ON p.idContrato = c.idContrato
 			INNER JOIN inmueble i ON c.idInmueble = i.idInmueble
@@ -109,7 +109,7 @@ public class RepositorioPago
 							}
 						},
 						FechaPago = Convert.ToDateTime(reader["fechaPago"]),
-						Monto = Convert.ToInt32(reader["monto"]),
+						Monto = Convert.ToInt32(reader["montoPago"]),
 						nroPago = Convert.ToInt32(reader["nroPago"]),
 					});
 				}
@@ -123,7 +123,7 @@ public class RepositorioPago
 		Pago res = null;
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
-			var query = @"SELECT idPago, p.idContrato, fechaPago, monto, nroPago, i.direccion, i.precio, inq.nombre, inq.apellido
+			var query = @"SELECT idPago, p.idContrato, fechaPago, p.monto AS montoPago, nroPago, i.direccion, i.precio, inq.nombre, inq.apellido
 			FROM pago p
 			INNER JOIN contrato c ON p.idContrato    = c.idContrato
 			INNER JOIN inmueble i ON c.idInmueble    = i.idInmueble
@@ -157,7 +157,7 @@ public class RepositorioPago
 								}
 							},
 							FechaPago = Convert.ToDateTime(reader["fechaPago"]),
-							Monto = Convert.ToInt32(reader["monto"]),
+							Monto = Convert.ToInt32(reader["montoPago"]),
 							nroPago = Convert.ToInt32(reader["nroPago"]),
 						};
 					}
@@ -199,7 +199,7 @@ public class RepositorioPago
 		List<Pago> listaPagos = new List<Pago>();
 		using (MySqlConnection connection = new MySqlConnection(connectionString))
 		{
-			var query = @"SELECT idPago, p.idContrato, fechaPago, monto, nroPago, i.direccion, inq.nombre, inq.apellido
+			var query = @"SELECT idPago, p.idContrato, fechaPago, p.monto AS montoPago, nroPago, i.direccion, inq.nombre, inq.apellido
 			FROM pago p
 			INNER JOIN contrato c ON p.idContrato = c.idContrato
 			INNER JOIN inmueble i ON c.idInmueble = i.idInmueble
@@ -230,7 +230,7 @@ public class RepositorioPago
 							}
 						},
 						FechaPago = Convert.ToDateTime(reader["fechaPago"]),
-						Monto = Convert.ToInt32(reader["monto"]),
+						Monto = Convert.ToInt32(reader["montoPago"]),
 						nroPago = Convert.ToInt32(reader["nroPago"]),
 					});
 				}

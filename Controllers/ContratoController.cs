@@ -143,5 +143,66 @@ namespace Inmobiliaria_DotNet.Controllers
 				return View();
 			}
 		}
+
+		// GET: Contrato/Edit/5
+		[HttpGet]
+		public ActionResult RenovarContrato(int id)
+		{
+			ViewBag.Inquilino = repoInquilino.ListarInquilinos();
+			ViewBag.Inmueble = repoInmueble.ListarInmuebles();
+			Contrato contratoRenovar =  Repo.BuscarContrato(id);
+			contratoRenovar.FechaInicio = contratoRenovar.FechaFin.AddDays(1);
+			contratoRenovar.FechaFin = contratoRenovar.FechaFin.AddYears(2);
+			return View(contratoRenovar);
+		}
+
+		[HttpGet]
+		public ActionResult RescindirContrato(int id)
+		{
+			ViewBag.Inquilino = repoInquilino.ListarInquilinos();
+			ViewBag.Inmueble = repoInmueble.ListarInmuebles();
+			Contrato contratoRescindir =  Repo.BuscarContrato(id);
+
+			return View(contratoRescindir);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult RescindirContrato(int id, Contrato contrato)
+		{
+			try
+			{
+				Contrato contratoRescindir =  Repo.BuscarContrato(id);
+				var pagos = repoPago.VerPagosContrato(id);
+
+				contratoRescindir.idContrato = id;
+				 var result = Repo.RescindirContrato(contratoRescindir, pagos);
+				return RedirectToAction("MultaContrato", new {
+				multa = result.Multa,
+				idContrato = contratoRescindir.idContrato,
+				pagosRealizados = result.PagosRealizados,
+				pagosEsperados = result.PagosEsperados,
+				pagosPendientes = result.PagosPendientes
+        });
+			}
+			catch
+			{
+			throw;
+			//return View();
+			}
+		}
+
+    // Action that shows the penalty
+		public ActionResult MultaContrato(int multa, int idContrato, int pagosRealizados, int pagosEsperados, bool pagosPendientes)
+    {
+			Contrato contrato = Repo.BuscarContrato(idContrato);
+			ViewBag.Contrato = contrato;
+			ViewBag.PagosRealizados = pagosRealizados;
+			ViewBag.PagosEsperados = pagosEsperados;
+			ViewBag.PagosPendientes = pagosPendientes;
+			ViewBag.Multa = multa;
+
+			return View();
+    }
 	}
 }
