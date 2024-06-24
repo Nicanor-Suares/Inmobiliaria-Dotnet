@@ -6,9 +6,15 @@
 
 <h1>Lista de Inmuebles</h1>
 
-<p>
-	<a asp-action="AltaInmueble" class="btn btn-primary">Agregar Inmueble</a>
-</p>
+<div class="d-flex  align-items-center">
+	<p class="me-2">
+		<a asp-action="BuscarPorFecha" class="btn btn-primary">Buscar por fecha</a>
+	</p>
+	<p>
+		<a asp-action="AltaInmueble" class="btn btn-primary">Agregar Inmueble</a>
+	</p>
+</div>
+
 <table class="table">
 	<thead>
 		<tr>

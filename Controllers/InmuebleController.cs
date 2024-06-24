@@ -140,5 +140,33 @@ namespace Inmobiliaria_DotNet.Controllers
 				return View();
 			}
 		}
+
+		// Action to display the date selection form
+    public ActionResult BuscarPorFecha()
+    {
+        return View();
+    }
+
+		// GET: Inmueble/BuscarPorFecha
+		public ActionResult MostrarDisponibles(DateTime? fechaInicio, DateTime? fechaFin)
+		{
+			try
+			{
+				List<Inmueble> inmueblesDisponibles = new List<Inmueble>();
+				if (fechaInicio.HasValue && fechaFin.HasValue)
+				{
+					inmueblesDisponibles = Repo.BuscarPorFecha(fechaInicio.Value, fechaFin.Value);
+					ViewBag.StartDate = fechaInicio.Value;
+					ViewBag.EndDate = fechaFin.Value;
+				}
+
+				return View(inmueblesDisponibles);
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+		}
+
 	}
 }

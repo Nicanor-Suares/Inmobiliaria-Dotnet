@@ -1,0 +1,46 @@
+@model List<Inmobiliaria_DotNet.Models.Inmueble>
+
+@{
+    ViewData["Title"] = "Inmuebles Disponibles";
+}
+
+<h1>Inmuebles disponibles</h1>
+
+
+@if (Model != null && Model.Count > 0)
+{
+    <h2>inmuebles disponibles desde @ViewBag.StartDate.ToString("d") hasta @ViewBag.EndDate.ToString("d")</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Direccion</th>
+                <th>Precio</th>
+                <th>Disponibilidad</th>
+                <th>Propietario</th>
+                <th>Tipo</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Direccion</td>
+                    <td>@item.Precio</td>
+                    <td>@(item.Disponibilidad ? "Disponible" : "No disponible")</td>
+                    <td>@item.PropietarioInmueble.Nombre @item.PropietarioInmueble.Apellido</td>
+                    <td>@item.TipoInmueble.tipo</td>
+                    <td>
+                      <a href='@Url.Action("DetallesInmueble", new { id = item.idInmueble })' class="btn btn-sm btn-warning">
+                        <i class="fa fa-circle-info"></i>
+                      </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (ViewBag.StartDate != null && ViewBag.EndDate != null)
+{
+    <p>No se encontraron inmuebles disponibles para esas fechas.</p>
+}
