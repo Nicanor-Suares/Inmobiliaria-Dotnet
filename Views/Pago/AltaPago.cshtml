@@ -19,11 +19,11 @@
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 			<div class="form-group">
 				<label asp-for="IdContrato" class="control-label">Contrato</label>
-				<select class="form-control" name="IdContrato">
+				<select class="form-control" name="IdContrato" id="idContrato">
 					<option value="" disabled selected>Seleccione el contrato</option>
 					@foreach (var item in listaContratos)
 					{
-						<option value="@item.idContrato">@(item.ToString())</option>
+						<option value="@item.idContrato">@(item.ToString()), @item.Monto</option>
 					}
 				</select>
 				<span asp-validation-for="IdContrato" class="text-danger"></span>
@@ -36,6 +36,7 @@
 			<div class="form-group">
 				<label asp-for="Monto" class="control-label"></label>
 				<input asp-for="Monto" class="form-control" type="number"/>
+				<small id="montoHint" class="form-text text-muted">Sugerencia: <span id="precioSugerido"></span></small>
 				<span asp-validation-for="Monto" class="text-danger"></span>
 			</div>
 			<div class="form-group">
@@ -50,3 +51,19 @@
 	</div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectContrato = document.getElementById('idContrato');
+		    var priceHintSpan = document.getElementById('precioSugerido');
+
+        selectContrato.addEventListener('change', function () {
+            var selectedOption = selectContrato.options[selectContrato.selectedIndex];
+            var optionText = selectedOption.textContent.trim();  // Obtener el texto de la opcion elegida
+
+            // Extraer el precio
+            var precio = optionText.split(', ')[1];
+						console.log(precio)
+        		priceHintSpan.textContent = precio ? precio : '';
+        });
+    });
+</script>
